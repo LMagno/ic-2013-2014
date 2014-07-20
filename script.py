@@ -15,9 +15,6 @@ workflows = {}
 unnamed_workflows = []
 
 def main():
-    # Search for 'workflows' in global namespace
-    global workflows
-
     # Regular expression for extracting each workflow from data
     p = re.compile(r"digraph\s*[^{}]*\s*{[^{}]*}")
 
