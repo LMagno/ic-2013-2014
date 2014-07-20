@@ -1,4 +1,0 @@
-\select@language {brazilian}
-\contentsline {section}{Refer\^encias}{3}{section*.3}
-\select@language {brazilian}
-\select@language {brazilian}
