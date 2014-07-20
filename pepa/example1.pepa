@@ -1,0 +1,28 @@
+// Execution rates associated to each activity
+rate_a = 0.33;   rate_b = 0.20;   rate_c = 1.00;
+rate_d = 0.50;   rate_e = 0.07;   rate_f = 1.00;
+rate_g = 0.50;   rate_h = 0.01;   rate_i = 0.50;
+rate_j = 1.00;   rate_k = 0.50;   rate_l = 1.00;
+rate_m = 1.00; 
+
+// Routing probabilities associated to the choices
+prob_c = 0.1;	prob_d = 1 - prob_c;
+prob_e = 0.25;	prob_g = 1 - prob_e;
+prob_k = 0.05;	prob_l = 1 - prob_k;
+
+// Number of servers
+num_servers = 1;
+
+// Order processing
+POrderProcessing = (a, rate_a).((b, prob_c * rate_b).(c, rate_c).POrderProcessing +  
+							    (b, prob_d * rate_b).PStock);
+PStock 			 = (d, prob_g * rate_d).PFinalize + 
+                   (d, prob_e * rate_d).(e, rate_e).(f, rate_f).PFinalize; 
+PFinalize 		 = (g, rate_g).(h, rate_h).(m, rate_m).POrderProcessing;
+PInvoice 		 = (g, infty).(i, rate_i).PCheck;
+PCheck 			 = (j, prob_l * rate_j).(l, rate_l).(m, infty).PInvoice + 
+				   (j, prob_k * rate_j).(k, rate_k).PCheck;
+
+// Whole process
+POrderProcessing[num_servers] <g,m> PInvoice[num_servers]
+

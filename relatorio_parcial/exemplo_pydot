@@ -1,0 +1,9 @@
+# 'gr' é uma instância da classe graph
+
+# traduzir o grafo 'gr' para DOT
+dot = write(gr)
+
+# gravar a visualização gráfica no arquivo externo 'europe.png'
+gvv = gv.readstring(dot)
+gv.layout(gvv,'dot')
+gv.render(gvv,'png','europe.png')

@@ -1,0 +1,21 @@
+graph		: digraph [ ID ] '{' stmt_list '}'
+
+stmt_list 	: [ stmt [ ';' ] [ stmt_list ] ]
+
+stmt		: node_id [ node_attr_list ] ["->" node_list ]
+
+node_id		: ID
+
+node_list	:  [ edge_prob ] node_id [ ',' node_list ] 
+
+edge_prob	: '[' number ']'
+
+number		: DIGIT* ['.' DIGIT* ]
+	
+node_attr_list 	:  '[' ( "activity" ',' "rate" '='  number | operator ) ']'
+
+operator	: "AND" | "XOR" | "OR"
+
+
+
+

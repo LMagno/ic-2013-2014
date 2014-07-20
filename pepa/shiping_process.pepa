@@ -1,0 +1,67 @@
+workCapacityWorker = 60.0;  // units of work per hour 
+workCapacityClerk = 60.0;
+workCapacityManager = 60.0;
+
+rateStart = 2;
+rateSync = 200.0;
+
+probGX1_1 = 0.85 * rateSync;
+probGX1_2 = 0.15 * rateSync;
+
+probGO1_1 = 0.20 * rateSync;
+probGO1_2 = 0.99 * rateSync;
+probGO1_not_1 = 0.80 * rateSync;
+probGO1_not_2 = 0.01 * rateSync;
+
+sizeA = 5.0; // units of work
+rateA =  workCapacityClerk / sizeA;
+
+sizeB = 30.0; // units of work
+rateB =  workCapacityWorker / sizeB;
+
+sizeC = 10.0; // units of work
+rateC =  workCapacityClerk / sizeC;
+
+sizeD = 30.0; // units of work
+rateD =  workCapacityManager / sizeD;
+
+sizeE = 5.0; // units of work
+rateE =  workCapacityClerk / sizeE;
+
+sizeF = 40.0; // units of work
+rateF =  workCapacityClerk / sizeF;
+
+sizeG = 15.0; // units of work
+rateG =  workCapacityClerk / sizeG;
+
+sizeH = 20.0; // units of work
+rateH =  workCapacityWorker / sizeH;
+
+
+PWarehouseWorker = (getWorker, infty).(releaseWorker, infty).PWarehouseWorker;
+PClerk = (getClerk, infty).(releaseClerk, infty).PClerk;
+PLogisticsManager = (getManager, infty).(releaseManager, infty).PLogisticsManager;
+
+PShipment = (start, rateStart).(ga1, rateSync).(getClerk, rateSync).(releaseClerk, rateA) . 
+					((gx1_1, probGX1_1). PGX1_1 + (gx1_2, probGX1_2).PGX1_2);
+ 
+PGX1_1 = (getClerk, rateSync).(releaseClerk, rateC).(go1, rateSync).(go2, rateSync).PGA2;
+PGX1_2 = (getClerk, rateSync).(releaseClerk, rateF).(getClerk, rateSync).(releaseClerk, rateG).PGA2;
+									
+PGO1_1 = (go1, infty).( (gx2_1, probGO1_1).PGX2_1 + (gx2_2, probGO1_not_1).PGX2_2);
+PGX2_1 = (getManager, rateSync).(releaseManager, rateD).(go2, infty).PGO1_1;
+PGX2_2 = (go2, infty).PGO1_1;
+
+PGO1_2 = (go1, infty).( (gx3_1, probGO1_2).PGX3_1 + (gx3_2, probGO1_not_2).PGX3_2);
+PGX3_1 = (getClerk, rateSync).(releaseClerk, rateE).(go2, infty).PGO1_2;
+PGX3_2 = (go2, infty).PGO1_2;
+	
+PGA2 = (ga2, rateSync).(getWorker, rateSync).(releaseWorker, rateH).PShipment;
+PGA1 = (ga1, infty).(getWorker, rateSync).(releaseWorker, rateB).(ga2,infty).PGA1; 
+
+((PShipment <ga1, ga2> PGA1 <go1,go2> PGO1_1 <go1,go2> PGO1_2)
+  <> (PShipment <ga1, ga2> PGA1 <go1,go2> PGO1_1 <go1,go2> PGO1_2)
+  <> (PShipment <ga1, ga2> PGA1 <go1,go2> PGO1_1 <go1,go2> PGO1_2)) 
+	<getClerk,releaseClerk> PClerk
+	<getManager,releaseManager> PLogisticsManager
+	<getWorker,releaseWorker>  PWarehouseWorker

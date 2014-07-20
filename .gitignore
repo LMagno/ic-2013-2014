@@ -1,0 +1,7 @@
+# Ignore parser files
+parser.out
+parsetab.py
+parsetab.pyc
+
+# Ignore output files
+workflow*

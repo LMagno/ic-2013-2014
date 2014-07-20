@@ -1,0 +1,12 @@
+digraph {
+	a -> and2_a;
+	and2_a [and] -> a2_1, a2_2;
+	a2_1 -> and2_b;
+	a2_2 -> and2_b;
+	and2_b -> b;
+	b -> and5_a;
+	and5_a [and] -> a5_1, a5_2;
+	a5_1 -> and5_b;
+	a5_2 -> and5_b;
+	and5_b -> c;
+}

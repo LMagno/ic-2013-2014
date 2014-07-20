@@ -1,0 +1,23 @@
+// Execution rates associated to each activity
+rate_a = 0.02;  rate_b = 0.1; 
+rate_c = 0.33;  rate_d = 0.12;
+
+// Sub processes representing the producer and the packer
+PProducer = (a, rate_a).(b, rate_b).PProducer;
+PPacker    = (c, rate_c).(d, rate_d).PPacker;
+
+// Sub process representing a stock with max size = 9 
+PStock  = (a,infty).(b, infty).PStock1;
+PStock1 = (a,infty).(b, infty).PStock2;
+PStock2 = (a,infty).(b, infty).PStock3;
+PStock3 = (a,infty).(b, infty).PStock4 + (c, infty).PStock;
+PStock4 = (a,infty).(b, infty).PStock5 + (c, infty).PStock1;
+PStock5 = (a,infty).(b, infty).PStock6 + (c, infty).PStock2;
+PStock6 = (a,infty).(b, infty).PStock7 + (c, infty).PStock3;
+PStock7 = (a,infty).(b, infty).PStock8 + (c, infty).PStock4;
+PStock8 = (a,infty).(b, infty).PStock9 + (c, infty).PStock5;
+PStock9 = (c,infty).PStock6;
+
+// Whole process
+PProducer <a,b> PStock <c> PPacker 
+

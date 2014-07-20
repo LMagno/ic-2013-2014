@@ -1,0 +1,11 @@
+digraph {
+	a 			-> b;
+	b 			-> and1;
+	and1 [and] 	-> e, or1;
+	or1 [xor] 	-> [0.15] c, [0.85] d;
+	e 			-> and2;
+	c 			-> or2;
+	d 			-> or2;
+	or2 	 	-> and2;
+	and2 	 	-> f;
+}

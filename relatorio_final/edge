@@ -1,0 +1,4 @@
+Edge:
+  Tail: xor1
+  Head: c
+  Prob: 0.15

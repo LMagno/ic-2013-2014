@@ -1,0 +1,127 @@
+Introdução
+	- Descrição sobre workflows
+		- Características gerais
+		- Descrição de workflows científicos
+		- Estruturas comumente encontradas
+			- Tarefas e operadores
+			- Sequência, paralelismo, escolha, sincronização, ciclos	
+
+	- Restrição sobre os workflows nesta etapa: estrutura em "blocos" e sem ciclos
+>>>> Seria melhor falar sobre essas restrições mais adiante no texto, na seção de Metodologia.
+
+	- Necessidade da previsão de desempenho
+	- Métodos existentes para se fazer a previsão
+		// Não conheço outros métodos, há algum material que dê uma geral sobre ou não é necessário citar outros?
+>>>> Você pode dizer que existem 3 métodos para a análise de desempenho de um software: medição, simulação e modelagem analítica. Na medição, simplesmente medimos o tempo de execução do software uma quantidade estatisticamente relevante de vezes e calcuamos os tempos médios de interesse; portanto, a medição só se aplica a sistemas já implementados - por isso, não tem caráter preditivo. Já a simulação e a modelagem anlítica se baseiam em modelos do software - portanto, são frequentemente usadas para a predição. A técnica que vamos usar no seu trabalho é modelagem analítica. No capítulo 2 da minha tese (seção 2.2) há uma explicação mais detalhada sobre isso.
+
+	- Descrição sobre o PEPA
+	- Dificuldade em ser utilizado por usuários não-especialistas
+	- Necessidade de automação de todo esse processo
+
+Objetivos
+	- Permitir que o usuário descreva um workflow de forma textual e simples
+	- Implementar um algoritmo que leia a descrição textual de um workflow e gere índices preditivos de seu desempenho automaticamente,
+	facilitando o uso de álgebras de processo
+
+
+Metodologia
+	// Planejo comentar sucintamente sobre cada um desses tópicos e deixar para aprofundar na seção Análises,
+	// portanto esta seção seria um resumo da Análises, pode?
+	// Descrição dos métodos em forma cronológica de implementação ou supor sequência de execução do projeto terminado?
+
+	- Descrição textual do workflow
+	- Descrição textual dos recursos utilizados por cada tarefa do workflow
+
+	- Programa em Python:
+		- Requisitos: 
+			// Biblioteca (nome do pacote nos repositórios do Ubuntu)
+			// Talvez não incluir os pacotes por questão de generalização para outros SOs, mas vou manter no esboço como forma de registro
+
+			- Python Lex-Yacc (python-ply)
+			- pyGraph (python-pygraph)
+				- pyDot (python-pydot)
+				- pyParsing 1.5.7 (python-pyparsing)
+					- "sudo pip install pyparsing==1.5.7"
+				- Python-Graphviz (libgv-python)
+			- pyPEPA 
+				- "sudo pip install pypepa"
+
+		- Leitura do modelo textual do workflow e utilização de analisadores léxico e sintático
+		- Criação da estrutura de grafo em Python
+		- Tradução para linguagem DOT
+			- Já implementado na biblioteca pyGraph
+		- Visualização gráfica a partir da linguagem DOT
+		- Tradução para expressão algébrica em PEPA
+		- Utilização da biblioteca pyPEPA para a predição de desempenho
+
+	// Talvez incluir um fluxograma para descrever os processos do programa?
+
+Resultados parciais
+	// É necessária alguma análise profunda aqui ou somente apresentar os produtos do programa?
+	// Fiquei em dúvida entre analisar aqui ou em Análises mesmo
+>>>> Acho que você não precisa aprofundar aqui os produtos do programa, apenas descrevê-los de forma sucinta. 
+
+	- Cronograma 
+		- Em forma de tabela, separando tópicos concluídos, parcialmente concluídos e não começados
+>>>> Acho que esse cronograma ficará melhor na seção de Análise, onde você discutirá melhor o que já foi feito e o que ainda está por vir. 
+
+	// A gramática que escrevi estava no formato certo? Não conheço muito a sintaxe.
+	// Aliás, essa gramática segue qual padrão? Acho interessante incluir uma referência aqui
+	- Gramática do arquivo de texto que descreve o workflow 
+
+	- A partir de algum exemplo de workflow, incluir:
+		- Descrição textual desse workflow
+		- Código em DOT criado
+		- Gráfico criado
+
+
+Análises
+	// Só preciso analisar o que já fiz, certo?
+	// Tentei pensar no que analisar sobre o projeto como um todo, mas não consegui pensar em nada até agora
+>>>> Essa seção faz mais sentido em projetos que coletam dados, e que depois precisam ser analisados estatisticamente, por exemplo. Mas acho que esses tópicos . No caso do seu projeto, acho que o importante aqui nessa seção é justificar as escolhas de implementação feitas e discutir o impacto delas no projeto.
+
+	- Descrição textual do workflow
+		- Discutir os detalhes e justificar algumas escolhas
+		- Verificação de erros não implementada ainda, já que presumimos o workflow como sendo bem comportado 
+		// Comentar sobre verificação de erros em Resultados parciais como algo a ser implementado?
+>>>> Acho que você pode falar sobre a intenção de implementar a verificação aqui nesta seção mesmo. Mas ressalte que isso só será feito se não comprometer o cronograma do restante do trabalho.
+
+	- Descrição textual dos recursos
+		- Não há muito o que dizer, só que a implementação na estrutura do grafo em si deve ser simples, pela flexibilidade desta em incluir mais características tanto em nós quanto em arestas
+
+	- Analisadores léxico e sintático
+		- Discussão muito técnica do uso em si, provavelmente melhor falar um pouco sobre o Lex-Yacc, sua portabilidade para Python e adicionar uma referência
+
+	- Estrutura do grafo na memória
+		- Comentar um pouco sobre as classes do pyGraph, suas funções e possibilidades
+
+	- Linguagem DOT e visualização gráfica
+		- Comentar sobre os estilos escolhidos e a possibilidade de se diferenciar os tipos de operadores por outras maneiras que não nome, como formato e cor
+
+
+Conclusões parciais
+	- Sobre o que já foi implementado:
+		- Descrição textual simples de um workflow
+		- Todo o resto do processo é automático
+		- Visualização gráfica do grafo criado, permitindo que o usuário confira se este corresponda ao workflow de entrada
+
+	- Sobre o que ainda será implementado:
+		- Dificuldades esperadas
+
+Referências
+	Ainda não li os textos, então depois as coloco
+
+
+
+Obs: 
+	- Ainda estou confuso quanto ao papel de cada seção, isso nunca ficou muito claro pra mim D:
+>>>>> Você fez uma boa estrutura inicial! Manda bala, que você está indo bem. :)
+
+	- No relatório final posso aproveitar grande parte deste ou tenho que reescrever tudo?
+>>>>> Sim, sim. Para o relatório final, você poderá simplesmente complementar esse relatório que está fazendo agora.
+
+	- Na página do pyPEPA (https://pypi.python.org/pypi/pypepa) é dito que algumas funções ainda não foram implementadas, isso atrapalha nosso projeto em algo?
+>>>>> Ainda não sei responder a essa pergunta. :(  Só descobriremos isso quando começarmos a usar a biblioteca de fato. Mas se verificarmos que não é possível usá-la no projeto da forma como esperávamos, usaremos o plugin PEPA para o Eclipse. Aí o processo de predição não ficará 100% automatizado, mas os resultados da predição não serão comprometidos.
+
+	- Posso incluir o código do programa em anexo? Acho meio estranho não o incluir, já que não é tão difícil e ajuda bastante a entender o que ele faz
+>>>>> Sim, pode sim. Inclusive, isso é algo recomendado. Portanto, capriche na indentação e nos comentários no código. :)

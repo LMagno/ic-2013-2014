@@ -1,0 +1,16 @@
+// Execution rates associated to each activity
+r_a = 0.50; r_b = 0.20; r_c = 0.25; r_d = 0.01;
+r_e = 1.00; r_immediate = 50.00;
+
+// Routing probabilities associated to the multi-choice
+prob_c = 0.85; prob_d = 0.73;
+
+// Medical service cost calculation sub processes
+PCalc = (a,r_a).(b,r_b).(e,r_e).PCalc;  
+P1    = (b,infty).((c1,prob_c * r_immediate).(c,r_c).(e, infty).P1 +
+                   (c2,(1-prob_c) * r_immediate).(e,infty).P1);
+P2    = (b,infty).((d1,prob_d * r_immediate).(d,r_d).(e,infty).P2 +
+                   (d2,(1-prob_d) * r_immediate).(e,infty).P2);
+
+// Whole process
+PCalc <b,e> P1 <b,e> P2

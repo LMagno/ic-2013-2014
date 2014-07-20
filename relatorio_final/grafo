@@ -1,0 +1,6 @@
+Workflow:
+  Name: workflow1
+  Nodes: ['a', 'xor1', 'c', 'b', 'e', 'd', 'f', 'xor2', 'and1', 'and2']
+  Edges: ['and1 -> e', 'and2 -> f', 'xor2 -> and2', 'e -> and2', 
+          'c -> xor2', 'xor1 -> d', 'and1 -> xor1', 'b -> and1', 
+          'a -> b', 'xor1 -> c', 'd -> xor2']

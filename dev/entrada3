@@ -1,0 +1,26 @@
+digraph {
+	a -> and1_a;
+	and1_a [and] -> and2_a, and3_a, xor_a;
+	and2_a [and] -> a2_1, a2_2;
+	a2_1 -> and2_b;
+	a2_2 -> and2_b;
+	and3_a [and] -> a3_1, a3_2, a3_3;
+	a3_1 -> and3_b;
+	a3_2 -> and3_b;
+	a3_3 -> and3_b;
+	xor_a [xor] -> and4_a, a_xor;
+	and4_a [and] -> a4_1, a4_2;
+	a4_1 -> and4_b;
+	a4_2 -> and4_b;
+	and4_b -> xor_b;
+	a_xor -> xor_b;
+	xor_b -> and1_b;
+	and2_b -> and1_b;
+	and3_b -> and1_b;
+	and1_b -> b;
+	b -> and5_a;
+	and5_a [and] -> a5_1, a5_2;
+	a5_1 -> and5_b;
+	a5_2 -> and5_b;
+	and5_b -> c;
+}

@@ -1,0 +1,10 @@
+graph		: digraph [ ID ] '{' stmt_list '}'
+stmt_list 	: stmt ';' [ stmt_list ]
+stmt		: node [ "->" edge_list ] 
+node		: ID [ node_attr ]
+node_attr	: number | operator
+edge_list	: edge [',' edge_list ]
+edge 		: [ edge_prob ] ID 
+edge_prob	: '[' number ']'
+number		: DIGIT* ['.' DIGIT* ]
+operator	: "AND" | "XOR" | "OR"

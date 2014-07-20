@@ -1,0 +1,6 @@
+Node:
+  Name: xor1
+  Type: XOR
+  Rate: None
+  Predecessors: ['and1']
+  Sucessors:    ['c', 'd']

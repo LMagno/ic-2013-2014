@@ -1,0 +1,26 @@
+// Taxas de execução associadas a cada atividade
+t_a = 1;   t_b = 1; 	t_c = 1;
+t_d = 1;   t_e = 1; 	t_f = 1;
+
+// Taxas de execução associadas aos operadores
+// (essa taxa deve ser bem alta quando comparada ao 
+// tempo de execução das atividades, para não 
+// impactar a análise do modelo
+t_and = 100;    t_or = 100;
+
+
+// Probabilidades associadas a cada ramo alternativo
+p_or1_1 = 0.15;    p_or1_2 = 0.85;
+
+
+// Ramo principal do workflow
+P = (a,t_a) . (b,t_b) . (and1,t_and) . (and2,t_and) . (f,t_f) . P;
+
+// Ramos paralelos criados por meio de operadores AND
+P_AND1_1 = (and1,t_and) .  (e,t_e) . (and2,t_and) . P_AND1_1;
+P_AND1_2 = (and1,t_and) .  ( ((or1,p_or1_1 * t_or) . (c,t_c)) + ((or1,p_or1_2 * t_or) . (d,t_d))). (and2,t_and) . P_AND1_2;
+
+
+// Indica os componentes paralelos do sistema
+// e os seus pontos de sincronizacao
+P <and1,and2> (P_AND1_1 <and1,and2> P_AND1_2)

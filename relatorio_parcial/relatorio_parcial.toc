@@ -1,0 +1,28 @@
+\select@language {brazilian}
+\contentsline {section}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Representa\IeC {\c c}\IeC {\~a}o de \emph {Workflows} Cient\IeC {\'\i }ficos}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Composi\IeC {\c c}\IeC {\~a}o de \emph {Workflows} Cient\IeC {\'\i }ficos}{2}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}An\IeC {\'a}lise de Desempenho}{2}{subsection.1.3}
+\contentsline {section}{\numberline {2}Objetivos}{3}{section.2}
+\contentsline {section}{\numberline {3}Metodologia}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}O Programa}{4}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Nota T\IeC {\'e}cnica}{4}{subsection.3.2}
+\contentsline {section}{\numberline {4}Resultados parciais}{5}{section.4}
+\contentsline {subsection}{\numberline {4.1}Descri\IeC {\c c}\IeC {\~a}o Textual do \emph {Workflow}}{5}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Estrutura de Dados Baseada em Grafo}{5}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Visualiza\IeC {\c c}\IeC {\~a}o do Grafo do \emph {Workflow}}{6}{subsection.4.3}
+\contentsline {section}{\numberline {5}An\IeC {\'a}lises}{7}{section.5}
+\contentsline {subsection}{\numberline {5.1}Descri\IeC {\c c}\IeC {\~a}o Textual do \emph {Workflow}}{7}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Descri\IeC {\c c}\IeC {\~a}o Textual dos Recursos}{7}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Analisadores L\IeC {\'e}xico e Sint\IeC {\'a}tico}{8}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Estrutura de Dados Baseada em Grafo}{8}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}Linguagem DOT}{9}{subsection.5.5}
+\contentsline {subsection}{\numberline {5.6}Modelagem Anal\IeC {\'\i }tica}{9}{subsection.5.6}
+\contentsline {subsection}{\numberline {5.7}Cronograma}{10}{subsection.5.7}
+\contentsline {section}{\numberline {6}Conclus\IeC {\~o}es parciais}{10}{section.6}
+\contentsline {section}{Refer\^encias}{11}{section*.3}
+\select@language {brazilian}
+\select@language {brazilian}
+\select@language {brazilian}
+\select@language {brazilian}
+\contentsline {section}{\numberline {A}C\IeC {\'o}digo do Programa}{12}{appendix.A}

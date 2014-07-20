@@ -1,0 +1,305 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{listingsutf8}
+\usepackage{color}
+\usepackage{scalefnt}
+\usepackage{cancel}
+\usepackage{picinpar}
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage[left=2.5cm,right=2.5cm,top=2.0cm,bottom=1.5cm]{geometry}
+\usepackage{siunitx}
+\usepackage[colorlinks=true,linkcolor=black,linktoc=all]{hyperref}
+\usepackage{indentfirst}
+\usepackage[nottoc]{tocbibind}
+\usepackage[fixlanguage]{babelbib}
+\selectbiblanguage{brazilian}
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+	inputencoding=utf8,
+	extendedchars=true,
+	numbers=left,
+	numberstyle=\tiny,
+	frame=lines,
+	captionpos=b,
+	literate=
+		{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ù}{{\`u}}1%
+		{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1%
+		{à}{{\`a}}1 {è}{{\'e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ò}{{\`o}}1%
+		{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ò}{{\`O}}1%
+		{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1%
+		{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1%
+		{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1%
+		{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1%
+		{ã}{{\~a}}1 {ẽ}{{\~e}}1 {ĩ}{{\~i}}1 {õ}{{\~o}}1 {ũ}{{\~u}}1%
+		{Ã}{{\~A}}1 {Ẽ}{{\~E}}1 {Ĩ}{{\~I}}1 {Õ}{{\~O}}1 {Ũ}{{\~U}}1%
+		{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1%
+		{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1%
+		{€}{{\EUR}}1 {£}{{\pounds}}1,
+}
+
+\date{\vfill Janeiro de 2014}
+\title{
+	Relatório Parcial de Iniciação Científica \vspace{40pt}\\ 
+	Uma Ferramenta de Software para a Predição de Desempenho de Workflows Científicos
+}
+
+\author{
+	\vspace{100pt}\\
+	Aluno: Lucas Magno \\ 
+	Bolsista PIBIC do CNPq \\
+	Instituto de Física (IF) \\
+	\\ \\
+	Orientadora: Kelly Rosa Braghetto\\ 
+	Departamento de Ciência da Computação (DCC) \\ 
+	Instituto de Matemática e Estatística (IME) \\
+	\\ \\ \\
+	Universidade de São Paulo
+} 
+
+\begin{document}
+  \maketitle
+  \thispagestyle{empty}
+  \newpage
+  \clearpage
+  \setcounter{page}{1}
+  \tableofcontents
+  \newpage
+
+  \section{Introdução}
+  	Inicialmente desenvolvidos para automatizar processos industriais e empresariais, os \emph{workflows} se popularizaram e passaram a ser usados na modelagem e automatização de experimentos científicos em diversas áreas da ciência. Um \emph{workflow científico} é a descrição completa ou parcial de um experimento científico em termo de suas atividades, controles de fluxo e dependência de dados \cite{phd:gadelha12}. 
+
+  	\subsection{Representação de \emph{Workflows} Científicos}
+  	Há várias maneiras de se representar um \emph{workflow científico}, mas entre elas se destacam \cite{phd:oga11}:
+
+  	\begin{itemize}
+  		\item \emph{Grafos direcionados:} uma das formas mais comuns e simples de representação de \emph{workflows}, permitem sua visualização gráfica e facilitam sua descrição através de modelos gráficos. Num grafo, os vértices representam as atividades de um experimento científico e, as arestas, as dependências entre essas.
+
+  		\item \emph{Redes de Petri:} muito utilizadas para modelar comportamento concorrente em sistemas distribuídos discretos, podem ser interpretadas como um caso particular de grafos direcionados, diferindo destes por possuírem dois tipos de vértices: lugares e transições. As arestas sempre conectam dois tipos diferentes de vértices, tornando o grafo bipartido.
+
+  		\item \emph{\emph{Unified Modeling Language} (UML):} linguagem padrão para modelagem de \emph{software} orientado a objetos, tendo como um de seus recursos o diagrama de atividades, que pode ser utilizado para descrever as dependências entre atividades e, portanto, \emph{workflows}. 
+
+  		\item \emph{Álgebras de Processos:} podem ser entendidas como um estudo do comportamento de sistemas paralelos ou distribuídos por meio de uma abordagem algébrica, que permite verificações, análises algébricas e aperfeiçoamento de processos por meio de transformações. Sendo assim, diferentemente dos exemplos anteriores, não possuem representação gráfica, somente textual.
+ 		
+  	\end{itemize}
+
+  	Somente grafos direcionados e álgebras de processo serão utilizados neste trabalho.
+
+  	\subsection{Composição de \emph{Workflows} Científicos}
+  	Um \emph{workflow} pode ser composto de diversos elementos, mas os relevantes neste projeto são atividades, que representam atividades reais de um experimento, e estruturas para descrever o fluxo de controle, que definem a ordem de execução das atividades dentro do \emph{workflow}. Temos como exemplos de estruturas sequência, paralelismo, escolha e sincronização.
+
+
+  	\subsection{Análise de Desempenho}
+  	É comum em experimentos científicos a manipulação de enormes quantidades de dados e processos muito demorados, o que estimula o cientista a aperfeiçoar o experimento antes de sua execução, pois esta pode demandar muitos recursos e tempo. Daí a necessidade da análise do desempenho de um \emph{workflow}, que pode ser feita através de três métodos \cite{phd:kelly11}:
+
+  	\begin{itemize}
+  		\item \emph{Medição:} consiste na execução do \emph{workflow} uma quantidade estatisticamente relevante de vezes e então no cálculo dos tempos médios de interesse. Logo, só pode ser aplicada a sistemas já implementados, não tendo caráter preditivo;
+
+  		\item \emph{Simulação:} baseada em modelos matemáticos cuja solução é dada por um programa que simula o comportamento modelado;
+
+  		\item \emph{Modelagem analítica:} também baseada em modelos, mas analisa numericamente determinados aspectos de interesse em um sistema.
+  	\end{itemize}
+
+  	Neste projeto, será usada a modelagem analítica, por ser preditiva, rápida e não muito difícil de se implementar, embora menos precisa que os outros métodos. Tanto as redes de Petri quanto as álgebras de processos são formalismos que possuem extensões estocásticas e que, portanto, podem ser usados no método modelagem analítica. 
+
+  	Como álgebra de processos estocástica foi escolhida a PEPA, \emph{Performance Evaluation Process Algebra} \cite{web:pepa}, porque o uso desse formalismo ainda não foi profundamente explorado para a análise de desempenho preditiva de \emph{workflows} científicos.
+  	
+  \section{Objetivos}
+
+  	Uma desvantagem da modelagem analítica usando PEPA é a necessidade da descrição do \emph{workflow} em uma linguagem de modelagem estocástica e utilização de programas específicos para a análise, exigindo do usuário um certo nível de conhecimento sobre álgebras de processo. No entanto, \emph{workflows} científicos são utilizados em diversas áreas da ciência que não necessitam de um grande aprofundamento em computação, o que pode inviabilizar a aplicação deste método. Portanto, é interessante que exista uma ferramenta capaz de automatizar todo o processo de predição de desempenho a partir da descrição do \emph{workflow} em uma linguagem textual simples, o que pretende este projeto.
+
+  \newpage
+  \section{Metodologia}
+
+  	Experimentos científicos podem ser muito complicados, com inúmeras atividades diferentes que podem não ser executadas de forma linear. Por isso é considerado, num primeiro momento, que os \emph{workflows} a serem analisados serão bem comportados, isto é, apresentam somente um ponto de entrada e um ponto de saída, têm sua estrutura em forma de ``blocos''  e não apresentam ciclos, ou laços, o que permite uma implementação mais simples.
+
+
+  	\subsection{O Programa}
+  		Para automatizar o processo de predição de desempenho, será implementado um programa que realiza, automaticamente, as seguintes etapas:
+
+  		\begin{enumerate}
+  			\item Lê como entrada uma descrição textual de um \emph{workflow}.
+  			\item Gera uma estrutura de dados baseada em grafo na memória representando o \emph{workflow}.
+  			\item Gera uma visualização do \emph{workflow} de entrada.
+  			\item Gera um modelo analítico (estocástico) do \emph{workflow}.
+  			\item Obtém a solução numérica desse modelo.
+  			\item Extrai índices de desempenho a partir dessa solução.
+  		\end{enumerate}
+
+  		Para tanto, foi escolhida a linguagem \emph{Python}, por flexibilidade, facilidade de aprendizado e grande número de bibliotecas auxiliares.
+
+  		Na etapa 1, foi definida uma gramática simples baseada na linguagem DOT \cite{web:dot} e se utilizou os analisadores léxico e sintático disponíveis na biblioteca PLY, \emph{Python Lex-Yacc} \cite{web:ply} (com dependência na biblioteca \emph{pyParsing} \cite{web:pyparsing}), para efetuar sua leitura.
+
+  		Na etapa 2, escolheu-se para a criação da estrutura citada a biblioteca \emph{python-graph} \cite{web:python-graph}, que permite a criação e manipulação de diversos tipos de grafos por meio de classes. Através de ferramentas já implementadas nessa biblioteca, foi possível, na etapa 3, gerar uma tradução da estrutura criada anteriormente para a linguagem DOT e então gravar um arquivo \emph{pdf} com a visualização gráfica dessa mesma estrutura. Essas ferramentas, porém, requerem as bibliotecas \emph{pydot} \cite{web:pydot} e \emph{Graphviz} \cite{web:graphviz}.
+
+  		As etapas restantes, no entando, ainda não foram implementadas, mas algumas estratégias para sua execução já foram delineadas. Pretende-se, então, a partir da estrutura criada na etapa 2, que o programa gere um modelo analítico em PEPA e utilize sua implementação em \emph{Python}, a \emph{pyPEPA} \cite{web:pypepa}, para obter a solução numérica desse modelo e extrair os índices de desempenho do \emph{workflow}, finalizando o processo de predição. 
+
+  		Há também a pretensão em se fazer certas alterações no programa, como permitir a descrição textual dos recursos utilizado por um \emph{workflow}, extraindo seus índices de desempenho levando em conta tais recursos, e, opcionalmente, eliminar a restrição imposta sobre \emph{workflows} neste primeiro momento. Além disso, outras ferramentas serão usadas para auxiliar a compreensão dos conceitos envolvidos, entre elas \emph{Eclipse} \cite{web:eclipse} e \emph{Taverna} \cite{web:taverna}.
+
+	\subsection{Nota Técnica}
+
+		O projeto está sendo desenvolvido no sistema operacional Lubuntu 13.10 e testado a partir de um terminal linux.
+
+
+  \newpage
+  \section{Resultados parciais}
+
+  	Até agora, o programa executa todos os passos desde a leitura da descrição textual do \emph{workflow} à visualização gráfica da estrutura em grafo criada, exceto ler a descrição dos recursos utilizados por cada atividade, o que ainda não foi implementado. Consequentemente, apenas a linguagem de descrição do \emph{workflow} já foi definida. Para demonstrar as saídas do programa, serão utilizados exemplos de um mesmo experimento. O código do programa pode ser visto no apêndice.
+
+  	\subsection{Descrição Textual do \emph{Workflow}}
+  		Baseada em linguagem DOT, foi definida uma linguagem simples para a descrição textual de \emph{workflows}. Como a intenção dessa linguagem é permitir apenas a descrição de grafos que representem experimentos científicos, e não de qualquer tipo de grafo, ela é muito mais concisa que a linguagem DOT. Os detalhes desta linguagem serão discutidos mais adiante.
+
+	  	\lstinputlisting[caption={Gramática da linguagem de descrição textual de \emph{workflows}},label=lst:gramatica]{gramatica_workflow_entrada.txt}
+	  	\lstinputlisting[caption={Exemplo de descrição textual de um \emph{workflow} na linguagem definida},label=lst:linguagem]{entrada.workflow}
+
+	\subsection{Estrutura de Dados Baseada em Grafo}
+		Utilizando os analisadores léxicos e sintáticos juntamente com a biblioteca \emph{python-graph}, foi possível criar uma estrutura de dados baseada em grafo na memória, que utiliza classes para representar grafos, grafos direcionados e hipergrafos. Quando requisitada a impressão de um grafo para a tela, a biblioteca retorna uma lista contendo os vértices do grafo e outra contendo tuplas com dois vértices cada, que, no caso deste projeto, representam uma aresta direcionada. A seguir, a saída da impressão é ilustrada.
+
+		\lstinputlisting{grafo}
+
+	\newpage
+	\subsection{Visualização do Grafo do \emph{Workflow}}
+
+		A partir do grafo em memória do \emph{workflow}, o programa gerar arquivos contendo o código equivalente na linguagem DOT e um \emph{pdf} com a visualização do mesmo.\\
+
+
+		\begin{minipage}[c]{0.4\textwidth}
+			\centering
+			\lstinputlisting[caption={Exemplo de descrição do \emph{Workflow} em linguagem DOT},label=lst:dot]{workflow1.dot}
+		\end{minipage}%
+		\begin{minipage}[c]{0.6\textwidth}
+			\centering
+			\includegraphics[width=0.65\linewidth]{workflow1.pdf}
+			\captionof{figure}{Exemplo de visualização do \emph{workflow} criada a partir do código em DOT}
+			\label{fig:pdf}
+		\end{minipage}
+
+	\newpage
+  \section{Análises}
+  	\subsection{Descrição Textual do \emph{Workflow}}
+  		Como dito anteriormente, a gramática de descrição do \emph{workflow} definida é baseada na linguagem DOT, pois esta é amplamente utilizada na representação de grafos em geral. Porém, essa mesma generalidade implica em maior complexidade sintática, por isso a necessidade da definição de uma nova linguagem, capaz de lidar com as formas mais comuns de \emph{workflows} científicos, mas ainda assim minimalista. Portanto, definimos uma linguagem com as seguintes regras (ver o exemplo do Código \ref{lst:linguagem} para maior esclarecimento):
+
+  		\begin{itemize}
+  			\item Toda descrição textual de \emph{workflow} deve ser iniciada com a palavra ``digraph'', para manter similaridade com a linguagem DOT.
+  			\item A seguir, deve aparecer o nome do \emph{workflow}, que será usado para nomear os arquivos de saída.
+  			\item A descrição do \emph{workflow} propriamente dita fica entre chaves.
+  			\item Espaços e tabulações são ignorados.
+  			\item Todas as linhas da descrição terminam com ponto e vírgula (``;'').
+  			\item Não há declaração explícita de vértices e arestas, esta é feita de forma implícita.
+  			\item Nomes de vértices e arestas devem ser alfanuméricos e podem conter o símbolo \emph{underline} ``\_'', mas não podem iniciar com um número.
+  			\item Cada linha representa uma ou mais arestas, utilizando o símbolo ``->'' (seta) para separar o vértice de partida de seus vértices de destino.
+  			\item À esquerda da seta são declarados os vértices de partida com seus respectivos atributos após seu nome e entre colchetes: um número, caso seja uma atividade, representando sua taxa de execução, ou uma palavra (OR, XOR ou AND), caso seja um operador, representando seu tipo. Cada linha só pode conter um vértice de partida e seu respectivo atributo.
+  			\item À direita são declaradas os vértices de destino e seus respectivos atributos, separados por vírgula. Os atributos são números representando a probabilidade daquele caminho (aresta) ser tomado pelos dados e deve estar entre colchetes e antes do nome do vértice. Aqui há uma criação de vértices ainda não declarados, mas sem atributos, que serão adicionados posteriormente quando estes forem declarados como vértices de partida.
+  			\item Toda linha deve conter a seta, isto é, não se pode declarar somente um vértice em uma linha. No entanto, na declaração de arestas, o vértice de destino é criado automaticamente. Isto implica no fato de que vértices sem arestas partindo deles não podem ter atributos, exigindo em alguns casos a utilização de um vértice especial para simbolizar o final do \emph{workflow}.
+  		\end{itemize}
+  
+  		Entretanto, a gramática pode ser mudada eventualmente, caso alguma das partes do programa ainda não implementadas exijam isso. Além disso, ainda não é feita a verificação de erro na descrição textual do \emph{workflow}, o que pode ser implementado no futuro caso isso não comprometa o cronograma do projeto.
+
+  	\subsection{Descrição Textual dos Recursos}
+  		Nesta etapa, busca-se permitir que o usuário descreva os recursos utilizados por cada atividade de seu \emph{workflow} de forma sucinta e independente, permitindo melhor representar seu experimento sem afetar a abstração da descrição do próprio \emph{workflow}, além de facilitar alterações. Entretanto, a definição de uma linguagem para a descrição dos requisitos de recursos e a incorporação destes no modelo analítico do \emph{workflow} gerado pelo programa são atividades previstas para serem desenvolvidas no último quadrimestre do projeto.
+
+  	\newpage	
+  	\subsection{Analisadores Léxico e Sintático}
+  		Uma vez que foi decidido partir de uma descrição textual do \emph{workflow}, é necessário que o programa seja capaz de ler e interpretar o texto dado. Logo, é necessário o uso de analisadores léxicos e sintáticos, que têm exatamente essa função.
+
+  		O analisador léxico, ou \emph{lexer}, quebra o texto em pequenos fragmentos, ou \emph{tokens}, seguindo regras definidas pelo usuário. A seguir, passa esses \emph{tokens} ao analisador sintático, ou \emph{parser}, que, também a partir de regras, interpreta o papel de cada \emph{token} na sintaxe geral em relação aos anteriores, executando uma ação específica a cada \emph{token} novo. Apesar de não serem muito simples de se implementar, os analisadores permitem uma grande flexibilidade na definição da gramática do texto.
+
+  		Escolheu-se, então, utilizar o Lex, \emph{A Lexical Analyzer Generator}, e o Yacc, \emph{Yet Another Compiler-Compiler} \cite{web:lexyacc}. Apesar de antigos (1975 e 1970, respectivamente), ainda são amplamente utilizados através de reimplementações e frequentemente juntos. O que é exemplificado pela biblioteca PLY, \emph{Python Lex-Yacc}, uma implementação recente (2001) inteiramente em \emph{Python}, a qual busca entregar toda a funcionalidade do Lex/Yacc somada a uma extensa verificação de erro.
+
+  		Portanto, ao utilizar a biblioteca PLY, é possível definir uma sintaxe abstrata para o \emph{workflow} independente das outras partes do programa e, ao mesmo tempo, construir o grafo representante em tempo real, isto é, ao longo da leitura do texto, e de forma automática. 
+
+  	\subsection{Estrutura de Dados Baseada em Grafo}
+  		O motivo pela escolha de se representar o \emph{workflow} por meio de uma estrutura de dados em memória, em forma de grafo, se dá pela generalidade dessa estrutura, que não depende de nenhuma linguagem, facilitando sua manipulação e eventuais traduções para linguagens específicas. 
+
+  		Por o projeto ser em \emph{Python}, era necessária uma biblioteca desta linguagem que trabalhasse com grafos de uma maneira leve e flexível. Foi encontrada, então, a \emph{python-graph}, que preenche esses requisitos e oferece um grande número de algoritmos úteis ao se lidar com grafos. Por ser baseada em classes (por exemplo, a classe \emph{digraph}, que representa uma grafo direcionado), sua utilização é muito simples, como demonstrado no seguinte exemplo \cite{web:pygraphexample}:
+
+  		\lstinputlisting[language=Python,caption={%
+  			Exemplo de uso da biblioteca \emph{python-graph} fornecido em sua documentação oficial%
+  		}]{exemplo_pygraph}
+
+  	\newpage
+  	\subsection{Linguagem DOT}
+  		Além das funcionalidades descritas anteriormente, a biblioteca \emph{python-graph} ainda conta com ferramentas que lidam com a linguagem DOT, um dos motivos pelos quais ela foi escolhida. Associada às bibliotecas \emph{pydot} e \emph{Graphviz}, ela é capaz de traduzir automaticante um grafo seu para DOT, além de gerar gráficos para visualização desse grafo. Novamente, será utilizado um exemplo para a demonstração, desta vez adaptado de sua documentação oficial \cite{web:pygraphexample2}:
+
+  		\lstinputlisting[language=Python,caption={Exemplo adaptado de uso das ferramentas para DOT da biblioteca \emph{python-graph}}]{exemplo_pydot}
+
+  		No exemplo, o formato de imagem utilizado é o \emph{png}, porém neste projeto foi adotado o formato \emph{pdf}, por sua qualidade, versatilidade e facilidade de inclusão em documentos.
+
+  		Apesar de algumas restrições, como a ausência de atributos dos vértices nas imagens (Figura \ref{fig:pdf}) e não se poder definir o nome do grafo (Código \ref{lst:dot}, onde a palavra ``graphname'' aparece em seu lugar), ainda é vantajosa sua utilização, pois suas funções são relativamente simples de implementar e dão ao usuário a possibilidade de verificar se a estrutura em memória corresponde a seu \emph{workflow} original.
+
+  	\subsection{Modelagem Analítica}
+  		Uma vez que já existe o grafo na memória, só resta sua tradução para um modelo analítico e então efetuar a análise numérica. Embora esta etapa ainda não tenha sido implementada, algumas escolhas já foram feitas, como, por exemplo, o modelo de álgebra de processos estocástica, por apresentar vantagens em relação a outros modelos, dentre as quais as mais importantes são \cite{web:aboutpepa}:
+
+  		\begin{itemize}
+  			\item \emph{Composicionalidade:} a habilidade de modelar um sistema como a interação de subsistemas.
+  			\item \emph{Formalismo:} dar um significado preciso para todos os termos na linguagem.
+  			\item \emph{Abstração:} a habilidade de construir modelos complexos a partir de componentes detalhadas, desconsiderando os detalhes quando apropriado.
+  		\end{itemize}
+
+  		Dentre as linguagens disponíveis, será usada a PEPA, uma álgebra de processos estocásticos bem desenvolvida e que conta com várias ferramentas de apoio, como um complemento para o ambiente integrado de desenvolvimento \emph{Eclipse} e, recentemente, uma biblioteca para a linguagem \emph{Python}, a \emph{pyPEPA}. Essa biblioteca, porém, ainda está desenvolvimento e, portanto, não apresenta todas as funcionalidades da PEPA. Sendo assim, há a possibilidade dela não corresponder aos objetivos do projeto e, neste caso, a ferramenta \emph{Eclipse} teria de ser utilizada, comprometendo a automatização do processo, mas ainda assim permitindo obter os resultados de predição.
+
+  		No entando, a tradução para PEPA pode se provar complicada, pois envolve uso de algoritmos para percorrer o grafo e estruturas de dados como pilhas e filas, cuja aplicação neste contexto não é muito comum. A análise numérica, em contrapartida, espera-se que seja relativamente mais fácil, por já ter sido desenvolvida com esse objetivo.
+ 
+ 	\newpage
+  	\subsection{Cronograma}
+  		A Tabela \ref{tab:cronograma} mostra as etapas do projeto, bem como seus respectivos \emph{status} e previsões de duração.
+
+  	\begin{table}[ht]
+  		\centering
+  		\begin{tabular}{ccc}
+  			\emph{Etapa} & \emph{Status} & \emph{Duração}\\ 
+  			\hline 
+  			Estudo de \emph{Python} & Completa & Agosto a Outubro \\
+  			Descrição Textual do \emph{Workflow} & Completa & Setembro a Outubro \\
+  			Analisadores Léxico e Sintático & Completa & Outubro a Novembro \\
+  			Estrutura de Dados Baseada em Grafo em Memória & Completa & Outubro a Novembro \\
+  			Tradução da Estrutura para a Linguagem DOT & Completa & Novembro a Dezembro\\
+  			Criação de Gráficos a partir do Código DOT & Completa & Novembro a Dezembro\\
+  			Tradução da Estrutura para a Linguagem PEPA & Não iniciada & Fevereiro a Março\\
+  			Análise Numérica do Modelo em PEPA & Não iniciada & Abril a Maio \\
+  			Descrição Textual dos Recursos & Não iniciada & Maio a Junho \\
+  			Obtenção de Resultados de Predição com Recursos & Não iniciada & Junho a Julho \\
+  			Extensão do Programa para \emph{Workflows} mais Complexos (Opcional) & Não iniciada & Julho \\
+  			\hline
+  		\end{tabular}
+  		\caption{Cronograma resumido das etapas do projeto}
+  		\label{tab:cronograma}
+  	\end{table}
+
+  \section{Conclusões parciais}
+  	Neste projeto, foi proposto o desenvolvimento de um programa que, a partir da descrição textual de um \emph{workflow} científico e dos recursos usados por ele, gerasse índices preditivos de seu desempenho. A escolha de \emph{Python} como linguagem de implementação do projeto se provou bastante favorável, já que as estruturas de dados e bibliotecas existentes nessa linguagem agilizaram o desenvolvimento das funcionalidades primárias do programa.
+
+  	Os seis primeiros meses do projeto foram dedicados a:
+  	\begin{itemize}
+  		\item O estudo da linguagem \emph{Python} e suas bibliotecas utilizadas.
+  		\item O estudo dos conceitos relacionados ao tema do projeto, como ``\emph{workflows} científicos'', ``linguagens de modelagem de \emph{workflows}'' e ``modelos estocásticos'', como a PEPA.
+  		\item Criação de uma linguagem textual simples para a descrição de \emph{workflows}.
+  		\item Criação de um \emph{lexer} e um \emph{parser} para a leitura da descrição de um \emph{workflow}.
+  		\item Criação de uma estrutura de dados baseada em grafo em memória que represente um \emph{workflow}.
+  		\item Gerar arquivos contendo o código em linguagem DOT que representa o grafo em memória e sua visualização.
+  	\end{itemize}
+
+  	Os principais desafios para os próximos meses do projeto são:
+  	\begin{itemize}
+  		\item Criação de um algoritmo para a conversão de um grafo de \emph{workflow} para um modelo analítico em PEPA.
+  		\item Incorporação de informações sobre recursos nos modelos analíticos de \emph{workflows}.
+  		\item O uso da biblioteca \emph{pyPEPA} para a obtenção da solução numérica dos modelos analíticos. 
+  	\end{itemize}
+
+  \newpage
+  \bibliographystyle{bababbr3}
+  \bibliography{relatorio_parcial}
+
+  \newpage
+  \appendix
+  \section{Código do Programa}
+  	
+  	\lstinputlisting[language=Python]{lextest.py}
+
+\end{document}
