@@ -51,17 +51,15 @@ def main():
     decimals = len(str(n))
     number = "{{0:0{0}d}}".format(str(decimals))
 
-    for i in range(n):
-        # 'i' is an index of list 'unnamed_workflows'.
-
+    for i, uwkf in enumerate(unnamed_workflows):
         # Create current Workflow() object name
         name = 'workflow' + number.format(i + 1)
 
         # Add it to the object
-        unnamed_workflows[i].name = name
+        uwkf.name = name
 
         # And append the object to dictionary 'workflows'
-        workflows[name] = unnamed_workflows[i]
+        workflows[name] = uwkf
 
     # Now that all read workflows are in dictionary 'workflows', we can iterate through them and perform the next steps
     for wkf in workflows.values():
