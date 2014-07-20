@@ -1,7 +1,21 @@
-# Ignore parser files
+# Parser files
 parser.out
 parsetab.py
 parsetab.pyc
 
-# Ignore output files
+# Output files
 workflow*
+
+# LaTeX files
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+*.toc
+*.aux
+*.bbl
+*.blg
+*.out
+
+# Don't ignore any files inside pepa directory
+!pepa/
