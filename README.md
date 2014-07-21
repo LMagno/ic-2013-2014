@@ -6,6 +6,7 @@ O objetivo principal do projeto foi desenvolver uma ferramenta de software para 
 ## O Programa
 Para automatizar o processo de predição de desempenho, foi implementado um programa
 que realiza as seguintes etapas:
+
 1. Lê como entrada uma descrição textual de um workflow
 2. Gera uma estrutura de dados baseada em grafo na memória representando o workflow
 3. Gera uma visualização do workflow de entrada
