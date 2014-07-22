@@ -81,6 +81,10 @@
         Por ser comum em experimentos científicos a manipulação de de enormes quantidades de dados e a presença de processos muito demorados, é necessária a análise do desempenho dos \emph{workflows} associados, que pode ser feita através de \emph{medição}, \emph{simulação} ou \emph{modelagem analítica} \cite{phd:kelly11}. Foi escolhida, então, a modelagem analítica, um método preditivo e rápido, implementada por meio de uma álgebra de processos estocástica, a \emph{PEPA}, pois seu uso ainda não foi profundamente explorado para a análise de desempenho preditiva de \emph{workflows} científicos.
 
     \section{Objetivos}
+
+        Uma desvantagem da modelagem analítica usando \emph{PEPA} é a necessidade da descrição do \emph{workflow} em uma linguagem de modelagem estocástica e utilização de programas específicos para a análise, exigindo do usuário um certo nível de conhecimento sobre álgebras de processo. No entanto, \emph{workflows} científicos são utilizados em diversas áreas da ciência que não necessitam de um grande aprofundamento em computação, o que pode inviabilizar a aplicação deste método.
+
+        O objetivo do trabalho foi facilitar a extração de predições de desempenho para \emph{workflows} científicos. Para isso, foi desenvolvida uma ferramenta de software que gera modelos estocásticos em \emph{PEPA} e sua solução numérica a partir de modelos de \emph{workflows}. Os modelos de \emph{workflows} usados como entrada para a ferramenta são descritos textualmente na forma de um grafo dirigido - uma representação simples e que pode ser usada com facilidade por usuários não especialistas. Além do modelo em \emph{PEPA} e sua solução, a ferramenta também gera uma representação gráfica do modelo de \emph{workflow}, que permite que o usuário possa verificá-lo mais facilmente.
     \section{Materiais e Métodos}
     \section{Resultados}
     \section{Conclusões}
