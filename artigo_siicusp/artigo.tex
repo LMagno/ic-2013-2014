@@ -67,18 +67,19 @@
     \section*{Resumo}
     Este documento descreve as atividades realizadas durante o período de julho de 2013 a junho de 2014 no âmbito do projeto de iniciação científica do aluno Lucas Magno, número USP 7994983, orientado pela Profa. Dra. Kelly Rosa Braghetto e financiado por uma bolsa PIBIC/CNPq.
 
-    O objetivo principal do projeto foi desenvolver uma ferramenta de software para a conversão automática de modelos de \emph{workflows} em modelos estocásticos na álgebra de processos \emph{PEPA - Performance Evaluation Process Algebra}. A partir desses modelos estocásticos, é possível extrair predições de desempenho de \emph{workflows}.
+    O objetivo principal do projeto foi desenvolver uma ferramenta de software para a conversão automática de modelos de \emph{workflows} em modelos estocásticos na álgebra de processos \emph{PEPA - Performance Evaluation Process Algebra} \cite{web:pepa} . A partir desses modelos estocásticos, é possível extrair predições de desempenho de \emph{workflows}.
     \section*{Abstract}
 
     \newpage
     \section{Introdução}
         Inicialmente desenvolvidos para automatizar processos industriais e empresariais, os \emph{workflows} se popularizaram e passaram a ser usados na modelagem e automatização de experimentos científicos em diversas áreas da ciência. Um \emph{workflow científico} é a descrição completa ou parcial de um experimento científico em termo de suas atividades, controles de fluxo e dependência de dados \cite{phd:gadelha12}.
 
-        Há várias maneiras de se representar um \emph{workflow científico}, entre elas \emph{grafos direcionados}, \emph{UML \emph{(Unified Modeling Language)}}, \emph{redes de Petri} e \emph{álgebras de processo}. Estes mecanismos de representação são usados para criar modelos que especificam a ordem de execução das atividades dos \emph{workflows}. Além disso, as redes de Petri e as álgebras de processo são linguagens formais, permitindo que se verifiquem propriedades qualitativas e quantitativas dos modelos de \emph{workflow}. Neste trabalho, no entando, somente foram utilizados grafos direcionados e álgebras de processo.
+        Há várias maneiras de se representar um \emph{workflow científico}, entre elas \emph{grafos direcionados}, \emph{UML \emph{(Unified Modeling Language)}}, \emph{redes de Petri} e \emph{álgebras de processo} \cite{phd:oga11}:. Estes mecanismos de representação são usados para criar modelos que especificam a ordem de execução das atividades dos \emph{workflows}. Além disso, as redes de Petri e as álgebras de processo são linguagens formais, permitindo que se verifiquem propriedades qualitativas e quantitativas dos modelos de \emph{workflow}. Neste trabalho, no entando, somente foram utilizados grafos direcionados e álgebras de processo.
 
-    Neste projeto, \emph{workflows} são compostos por atividades, que representam atividades reais de um experimento, e estruturas para descrever o fluxo de controle, como \emph{sequência}, \emph{paralelismo}, \emph{escolha} e \emph{sincronização}, definidas por meio dos operadores \emph{AND} (paralelismo/sincronização), \emph{XOR} (escolha exclusiva/junção) e \emph{OR} (escolha múltipla/junção).
+    Para simplificar sua implementação, considera-se que \emph{workflows} sejam compostos por \emph{atividades}, que representam atividades reais de um experimento, e estruturas para descrever o fluxo de controle, como \emph{sequência}, \emph{paralelismo}, \emph{escolha} e \emph{sincronização}, definidas por meio dos operadores \emph{AND} (paralelismo/sincronização), \emph{XOR} (escolha exclusiva/junção) e \emph{OR} (escolha múltipla/junção).
 
-    Uma vez que
+        Por ser comum em experimentos científicos a manipulação de de enormes quantidades de dados e a presença de processos muito demorados, é necessária a análise do desempenho dos \emph{workflows} associados, que pode ser feita através de \emph{medição}, \emph{simulação} ou \emph{modelagem analítica} \cite{phd:kelly11}. Foi escolhida, então, a modelagem analítica, um método preditivo e rápido, implementada por meio de uma álgebra de processos estocástica, a \emph{PEPA}, pois seu uso ainda não foi profundamente explorado para a análise de desempenho preditiva de \emph{workflows} científicos.
+
     \section{Objetivos}
     \section{Materiais e Métodos}
     \section{Resultados}
