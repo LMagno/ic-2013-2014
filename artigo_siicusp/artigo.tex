@@ -105,8 +105,21 @@
         \end{enumerate}
 
     \section*{Resultados}
-    \section*{Conclusões}
 
+        Ao processar um \emph{workflow}, então, o programa cria arquivos de saída contendo a descrição do \emph{workflow} em \emph{DOT}, sua visualização, sua descrição em \emph{PEPA} e os índices de desempenho dela extraídos. Estes arquivos, entretanto, são geralmente muito extensos, então serão mostrados aqui somente um exemplo de \emph{workflow} de entrada e sua visualização. Demais exemplos estão disponíveis na página do projeto.\\
+
+        \begin{minipage}[c]{0.6\textwidth}
+            \centering
+            \lstinputlisting[caption={Exemplo de descrição do \emph{workflow} de entrada},label=lst:dot,tabsize=2]{example}
+        \end{minipage}%
+        \begin{minipage}[r]{0.4\textwidth}
+            \centering
+            \includegraphics[width=0.65\linewidth]{example.pdf}
+            \captionof{figure}{Exemplo de visualização do \emph{workflow} criada a partir do código em DOT}
+            \label{fig:pdf}
+        \end{minipage}
+
+    \section*{Conclusões}
 
     \bibliographystyle{bababbr3}
     \bibliography{references}
