@@ -1,0 +1,85 @@
+Probabilities of the system's steady states:
+P,P_and1_e,P_and1_xor1
+-1.40775284574e-18
+
+P,(e,r_e).((and2,r_AND).P_and1_e),P_and1_xor1
+-1.26297106095e-18
+
+P,P_and1_e,P_xor1
+-7.06042126843e-19
+
+P,(and2,r_AND).P_and1_e,P_and1_xor1
+-2.82997647729e-21
+
+P,(e,r_e).((and2,r_AND).P_and1_e),P_xor1
+-1.95921710228e-18
+
+P,P_and1_e,P_xor1_c
+3.43509599203e-20
+
+P,P_and1_e,P_xor1_d
+0.0049504950495
+
+P,(and2,r_AND).P_and1_e,P_xor1
+-4.33140794872e-21
+
+P,(e,r_e).((and2,r_AND).P_and1_e),P_xor1_c
+9.25185853854e-18
+
+P,(e,r_e).((and2,r_AND).P_and1_e),P_xor1_d
+0.990099009901
+
+P,P_and1_e,P_xor2
+4.84688739167e-22
+
+P,(and2,r_AND).P_and1_e,P_xor1_c
+9.930893542e-20
+
+P,(and2,r_AND).P_and1_e,P_xor1_d
+0.0049504950495
+
+P,(e,r_e).((and2,r_AND).P_and1_e),P_xor2
+1.38419015718e-19
+
+P,P_and1_e,(and2,r_AND).P_and1_xor1
+7.40248414829e-22
+
+P,(and2,r_AND).P_and1_e,P_xor2
+6.17470052876e-22
+
+P,(e,r_e).((and2,r_AND).P_and1_e),(and2,r_AND).P_and1_xor1
+1.38466929486e-19
+
+P,(and2,r_AND).P_and1_e,(and2,r_AND).P_and1_xor1
+6.54902350152e-22
+
+
+
+Activities throughput:
+xor1	-2.66959063707e-16
+c	9.38551843388e-18
+xor2	1.3952117451e-17
+e	0.49504950495
+and1	0.49504950495
+and2	0.49504950495
+
+
+Activities utilizations:
+
+Counter:
+P	1.0
+
+Counter:
+P_and1_e	0.0049504950495
+(and2	0.0049504950495
+(e	0.990099009901
+
+Counter:
+P_xor1_d	0.0049504950495
+P_xor1_c	3.43509599203e-20
+P_xor1	-7.06042126843e-19
+r_AND).P_and1_e	0.0049504950495
+P_xor2	4.84688739167e-22
+(and2	7.40248414829e-22
+r_e).((and2	0.990099009901
+P_and1_xor1	-1.40775284574e-18

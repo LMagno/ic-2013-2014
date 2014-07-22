@@ -1,0 +1,23 @@
+digraph workflow1 {
+	a [shape=box,		label=a];
+	xor1 [shape=diamond,	label=xor1,	color=green];
+	c [shape=box,		label=c];
+	b [shape=box,		label=b];
+	e [shape=box,		label=e];
+	d [shape=box,		label=d];
+	f [shape=box,		label=f];
+	xor2 [shape=diamond,	label=xor2,	color=green];
+	and1 [shape=diamond,	label=and1,	color=blue];
+	and2 [shape=diamond,	label=and2,	color=blue];
+	and1 -> e;
+	and2 -> f;
+	c -> xor2;
+	e -> and2;
+	xor2 -> and2;
+	xor1 -> d [label="0.85"];
+	and1 -> xor1;
+	b -> and1;
+	a -> b;
+	xor1 -> c [label="0.15"];
+	d -> xor2;
+}
