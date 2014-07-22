@@ -71,7 +71,7 @@
     \section*{Abstract}
 
     \newpage
-    \section{Introdução}
+    \section*{Introdução}
         Inicialmente desenvolvidos para automatizar processos industriais e empresariais, os \emph{workflows} se popularizaram e passaram a ser usados na modelagem e automatização de experimentos científicos em diversas áreas da ciência. Um \emph{workflow científico} é a descrição completa ou parcial de um experimento científico em termo de suas atividades, controles de fluxo e dependência de dados \cite{phd:gadelha12}.
 
         Há várias maneiras de se representar um \emph{workflow científico}, entre elas \emph{grafos direcionados}, \emph{UML \emph{(Unified Modeling Language)}}, \emph{redes de Petri} e \emph{álgebras de processo} \cite{phd:oga11}:. Estes mecanismos de representação são usados para criar modelos que especificam a ordem de execução das atividades dos \emph{workflows}. Além disso, as redes de Petri e as álgebras de processo são linguagens formais, permitindo que se verifiquem propriedades qualitativas e quantitativas dos modelos de \emph{workflow}. Neste trabalho, no entando, somente foram utilizados grafos direcionados e álgebras de processo.
@@ -80,7 +80,7 @@
 
         Por ser comum em experimentos científicos a manipulação de de enormes quantidades de dados e a presença de processos muito demorados, é necessária a análise do desempenho dos \emph{workflows} associados, que pode ser feita através de \emph{medição}, \emph{simulação} ou \emph{modelagem analítica} \cite{phd:kelly11}. Foi escolhida, então, a modelagem analítica, um método preditivo e rápido, implementada por meio de uma álgebra de processos estocástica, a \emph{PEPA}, pois seu uso ainda não foi profundamente explorado para a análise de desempenho preditiva de \emph{workflows} científicos.
 
-    \section{Objetivos}
+    \section*{Objetivos}
 
         Uma desvantagem da modelagem analítica usando \emph{PEPA} é a necessidade da descrição do \emph{workflow} em uma linguagem de modelagem estocástica e utilização de programas específicos para a análise, exigindo do usuário um certo nível de conhecimento sobre álgebras de processo. No entanto, \emph{workflows} científicos são utilizados em diversas áreas da ciência que não necessitam de um grande aprofundamento em computação, o que pode inviabilizar a aplicação deste método.
 
@@ -88,7 +88,7 @@
 
         Os modelos de \emph{workflows} usados como entrada para a ferramenta são descritos textualmente na forma de um grafo dirigido - uma representação simples e que pode ser usada com facilidade por usuários não especialistas. Além do modelo em \emph{PEPA} e sua solução, a ferramenta também gera uma representação gráfica do modelo de \emph{workflow}, que permite que o usuário possa verificá-lo mais facilmente.
 
-    \section{Materiais e Métodos}
+    \section*{Materiais e Métodos}
         Para que possua um modelo correspondente em \emph{PEPA}, um modelo de \emph{workflow} precisa ser bem estruturado e não possuir ambiguidades semânticas. Por essa razão, neste trabalho consideramos apenas modelos de \emph{workflow} que apresentam somente um ponto de entrada e um ponto de saída, têm sua estrutura em forma de ``blocos''  e não apresentam ciclos, ou laços, o que permite uma implementação mais simples.
 
         Para automatizar o processo de predição de desempenho, foi implementado um programa na linguagem \emph{Python} (versão 2.7), por flexibilidade, facilidade de aprendizado e grande número de bibliotecas auxiliares. Seu código fonte, detalhes de sua execução, dependências e exemplos de \emph{workflow} de entrada e suas representações em \emph{PEPA} geradas podem ser conferidos na página do projeto \cite{web:script}.
@@ -104,8 +104,8 @@
             \item Gera a solução numérica do modelo analítico e extrai seus índices de desempenho através da biblioteca \emph{pyPEPA} \cite{web:pypepa}, uma implementação recente da \emph{PEPA} em \emph{Python}.
         \end{enumerate}
 
-    \section{Resultados}
-    \section{Conclusões}
+    \section*{Resultados}
+    \section*{Conclusões}
 
 
     \bibliographystyle{bababbr3}
