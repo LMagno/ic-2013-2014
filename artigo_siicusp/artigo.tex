@@ -118,8 +118,26 @@
             \captionof{figure}{Exemplo de visualização do \emph{workflow} criada a partir do código em DOT}
             \label{fig:pdf}
         \end{minipage}
-
+    \newpage
     \section*{Conclusões}
+
+        Neste projeto de iniciação científica, foi desenvolvida uma ferramenta de software que converte de forma automática modelos de \emph{workflow} em modelos estocásticos e, a partir destes últimos, extrai medidas de desempenho dos \emph{workflows}, facilitando o uso de ferramentas de predição por usuários não-especialistas.
+
+        Os modelos de \emph{workflow} recebidos como entrada para o programa são definidos por meio de uma notação simples que permite descrever os modelos mais comuns de experimentos científicos.
+
+        Para a geração dos modelos estocásticos, usou-se a linguagem \emph{PEPA}, capaz de descrever uma grande variedade de processos, embora tenha uma sintaxe complexa. A análise numérica desses modelos foi feita por meio da biblioteca \emph{pyPEPA}, uma implementação recente de \emph{PEPA} em \emph{Python}.
+
+        A escolha de \emph{Python} como linguagem de implementação do programa se provou bastante favorável, já que as estruturas de dados e bibliotecas existentes nessa linguagem agilizaram o desenvolvimento das funcionalidades primárias do programa.
+
+        A complexidade da sintaxe da PEPA, entretanto, dificultou a conversão dos modelos de workflow, pois exigiu o tratamento de diversas especificidades desta. Além disso, a implementação recente da pyPEPA apresentou diversos obstáculos durante o projeto, como sua sintaxe muito restritiva (ela ainda não suporta completamente a sintaxe da PEPA) e sua documentação escassa.
+
+        Por estes motivos, as etapas relativas a essas ferramentas ocuparam grande parte do cronograma do projeto, não sendo possível, portanto, realizar outras funcionalidades inicialmente sugeridas neste trabalho, mas que ainda são interessantes de se implementar, como por exemplo:
+        \begin{itemize}
+            \item Gerar modelos analíticos de \emph{workflows} que contenham o operador \emph{OR}
+            \item Definição de uma linguagem para descrição dos recursos que podem ser utilizados por um \emph{workflow}
+            \item Incorporação de informações sobre recursos nos modelos analíticos
+            \item Permitir a descrição de \emph{workflows} cuja estrutura não seja ``em blocos''
+        \end{itemize}
 
     \bibliographystyle{bababbr3}
     \bibliography{references}
