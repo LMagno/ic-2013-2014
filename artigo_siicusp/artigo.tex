@@ -75,7 +75,7 @@
     \section*{Resumo}
         Experimentos científicos frequentemente lidam com grandes quantidades de dados e processos com altos custos computacionais, exigindo a análise de seus desempenhos através de métodos que não envolvam suas execuções. Um destes métodos é a representação dos experimentos em modelos de \emph{workflow} por meio de linguagens formais, que permitem a extração de predições quantitativas de desempenho. Entretanto, o uso dessas linguagens requer familiaridade com formalismos complexos, restringindo-o às áreas da ciência com maior domínio em computação.
 
-        Neste projeto, portanto, foi desenvolvida uma ferramenta em \emph{Python} capaz de, a partir da descrição de um \emph{workflow} em uma linguagem simples e intuitiva, gerar suas predições de desempenho através da álgebra de processos estocástica \emph{PEPA}, permitindo a otimização de experimentos científicos por usuários não-especialistas. 
+        Neste projeto, portanto, foi desenvolvida uma ferramenta em \emph{Python} capaz de, a partir da descrição de um \emph{workflow} em uma linguagem simples e intuitiva, gerar suas predições de desempenho através da álgebra de processos estocástica \emph{PEPA}, permitindo a otimização de experimentos científicos por usuários não-especialistas.
     \section*{Abstract}
 
     \thispagestyle{fancy}
@@ -84,17 +84,17 @@
     \section*{Introdução}
         Inicialmente desenvolvidos para automatizar processos industriais e empresariais, os \emph{workflows} se popularizaram e passaram a ser usados na modelagem e automatização de experimentos científicos em diversas áreas da ciência. Um \emph{workflow científico} é a descrição completa ou parcial de um experimento científico em termo de suas atividades, controles de fluxo e dependência de dados \cite{phd:gadelha12}.
 
-        Por ser comum em workflows científicos a manipulação de enormes quantidades de dados e a presença de processos que consomem muitos recursos computacionais, ferramentas que forneçam predições de desempenho desse tipo de sistema fazem-se necessárias. As predições auxiliam na escolha dos recursos computacionais apropriados para a execução e na identificação de possíveis problemas na modelagem dos workflows, possibilitando assim execuções mais eficientes.
+        Por ser comum em \emph{workflows} científicos a manipulação de enormes quantidades de dados e a presença de processos que consomem muitos recursos computacionais, ferramentas que forneçam predições de desempenho desse tipo de sistema fazem-se necessárias. As predições auxiliam na escolha dos recursos computacionais apropriados para a execução e na identificação de possíveis problemas na modelagem dos \emph{workflows}, possibilitando assim execuções mais eficientes.
 
         Há várias maneiras de se representar um \emph{workflow científico}, como, por exemplo, por meio de \emph{grafos direcionados}, \emph{UML \emph{(Unified Modeling Language)}}, \emph{redes de Petri} e \emph{álgebras de processos} \cite{phd:oga11}. Estes mecanismos de representação são usados para criar modelos que especificam a ordem de execução das atividades pertencentes aos \emph{workflows}. Linguagens formais como as redes de Petri e as álgebras de processos, vão além de uma simples representação, pois permitem também que se verifique propriedades qualitativas e quantitativas dos modelos de \emph{workflow} nelas representados. Em particular, extensões estocásticas dessas linguagens frequentemente são usadas para a criação de modelos preditivos do desempenho de sistemas computacionais.
 
-        Apesar dos inúmeros benefícios que esses formalismos podem trazer à modelagem de workflows, o seu uso na prática impõe algumas dificuldades.  Ele exige que o usuário tenha familiaridade com linguagens e modelos estocásticos (de compreensão pouco intuitiva) e com seus programas de simulação ou análise numérica. No entanto, os \emph{workflows} científicos são criados e manipulados por cientistas das mais diversas áreas da ciência e que, geralmente, não são especialistas em computação.
+        Apesar dos inúmeros benefícios que esses formalismos podem trazer à modelagem de \emph{workflows}, o seu uso na prática impõe algumas dificuldades.  Ele exige que o usuário tenha familiaridade com linguagens e modelos estocásticos (de compreensão pouco intuitiva) e com seus programas de simulação ou análise numérica. No entanto, os \emph{workflows} científicos são criados e manipulados por cientistas das mais diversas áreas da ciência e que, geralmente, não são especialistas em computação.
 
     \section*{Objetivos}
 
-    Este trabalho aborda o problema da predição de desempenho de workflows científicos, propondo uma ferramenta de software que automatiza a geração de predições baseadas em modelos estocásticos. O objetivo da ferramenta é esconder do usuário final a complexidade associada à criação e análise desse tipo de modelo.
+    Este trabalho aborda o problema da predição de desempenho de \emph{workflows} científicos, propondo uma ferramenta de software que automatiza a geração de predições baseadas em modelos estocásticos. O objetivo da ferramenta é esconder do usuário final a complexidade associada à criação e análise desse tipo de modelo.
 
-     A ferramenta -- chamada de \texttt{wkf2pepa} -- gera automaticamente modelos estocásticos a partir de modelos de workflows descritos em uma linguagem bastante simples e de compreensão intuitiva, fácil de ser usada por cientistas de qualquer domínio. A ferramenta obtém a solução numérica dos modelos estocásticos e então extrai índices de desempenho relacionados aos modelos de workflows fornecidos como entrada.
+     A ferramenta -- chamada de \texttt{wkf2pepa} -- gera automaticamente modelos estocásticos a partir de modelos de \emph{workflows} descritos em uma linguagem bastante simples e de compreensão intuitiva, fácil de ser usada por cientistas de qualquer domínio. A ferramenta obtém a solução numérica dos modelos estocásticos e então extrai índices de desempenho relacionados aos modelos de \emph{workflows} fornecidos como entrada.
 
     \section*{Materiais e Métodos}
 
@@ -122,7 +122,7 @@
 
     O código fonte da \texttt{wkf2pepa}, suas dependências, informações sobre o seu uso, exemplos de \emph{workflows} de entrada (e seus respectivos modelos em \emph{PEPA}) podem ser vistos na página do projeto \cite{web:script}.
 
-    Ao processar um \emph{workflow}, a ferramenta cria arquivos de saída contendo a descrição do \emph{workflow} em \emph{DOT}, sua representação gráfica, sua descrição em \emph{PEPA} e os índices de desempenho dela extraídos. Um exemplo de descrição de workflow que pode ser usada como entrada para a ferramenta e parte dos resultados de saída gerados para ela são mostrados  na Figura~\ref{fig:exemplo}. Outros exemplos de workflows com estruturas mais complexas e seus respectivos resultados encontram-se na página do projeto \cite{web:script}.
+    Ao processar um \emph{workflow}, a ferramenta cria arquivos de saída contendo a descrição do \emph{workflow} em \emph{DOT}, sua representação gráfica, sua descrição em \emph{PEPA} e os índices de desempenho dela extraídos. Um exemplo de descrição de \emph{workflow} que pode ser usada como entrada para a ferramenta e parte dos resultados de saída gerados para ela são mostrados  na Figura~\ref{fig:exemplo}. Outros exemplos de \emph{workflows} com estruturas mais complexas e seus respectivos resultados encontram-se na página do projeto \cite{web:script}.
 
 \begin{figure}[h]
         \centering
@@ -154,13 +154,13 @@
     \newpage
     \section*{Conclusões}
 
-    Este trabalho apresenta a ferramenta de software \texttt{wkf2pepa}, que converte de forma autom\'atica modelos de \emph{workflow} em modelos estocásticos e, a partir destes \'ultimos, extrai predições do desempenho dos \emph{workflows}. A predição do desempenho de workflows é importante porque auxilia a identificação de problemas em sua modelagem e o provisionamento dos recursos necessários para a execução eficiente desses sistemas.
+    Este trabalho apresenta a ferramenta de software \texttt{wkf2pepa}, que converte de forma autom\'atica modelos de \emph{workflow} em modelos estocásticos e, a partir destes \'ultimos, extrai predições do desempenho dos \emph{workflows}. A predição do desempenho de \emph{workflows} é importante porque auxilia a identificação de problemas em sua modelagem e o provisionamento dos recursos necessários para a execução eficiente desses sistemas.
 
-    Os modelos de \emph{workflow} usados como entrada para a \texttt{wkf2pepa} são definidos por meio de uma notaç\~ao textual simples e intuitiva, que permite descrever as estruturas de fluxos de atividades mais comumente encontradas nos experimentos cient\'ificos. Assim, a \texttt{wkf2pepa} possibilita que usuários obtenham predições sobre o desempenho de workflows de forma prática, sem a necessidade de conhecer detalhes sobre modelagem estocástica e análise numérica.
+    Os modelos de \emph{workflow} usados como entrada para a \texttt{wkf2pepa} são definidos por meio de uma notaç\~ao textual simples e intuitiva, que permite descrever as estruturas de fluxos de atividades mais comumente encontradas nos experimentos cient\'ificos. Assim, a \texttt{wkf2pepa} possibilita que usuários obtenham predições sobre o desempenho de \emph{workflows} de forma prática, sem a necessidade de conhecer detalhes sobre modelagem estocástica e análise numérica.
 
-    A \texttt{wkf2pepa} gera modelos estocásticos na álgebra de processos \emph{PEPA}. A ferramenta usa a biblioteca \emph{pyPEPA} para obter a solução numérica dos modelos estocásticos e índices de desempenho tais como a taxa de utilização dos componentes do modelo e o rendimento de cada atividade e do workflow como um todo.
+    A \texttt{wkf2pepa} gera modelos estocásticos na álgebra de processos \emph{PEPA}. A ferramenta usa a biblioteca \emph{pyPEPA} para obter a solução numérica dos modelos estocásticos e índices de desempenho tais como a taxa de utilização dos componentes do modelo e o rendimento de cada atividade e do \emph{workflow} como um todo.
 
-    Como trabalhos futuros, pretende-se estender a \texttt{wkf2pepa} para que ela lide com modelos de workflows que incluam uma descrição dos recursos disponíveis para a execução. Com isso, os modelos estocásticos gerados e os índices de desempenho extraídos a partir deles fornecerão uma boa aproximação do desempenho real esperado para os workflows.
+    Como trabalhos futuros, pretende-se estender a \texttt{wkf2pepa} para que ela lide com modelos de \emph{workflows} que incluam uma descrição dos recursos disponíveis para a execução. Com isso, os modelos estocásticos gerados e os índices de desempenho extraídos a partir deles fornecerão uma boa aproximação do desempenho real esperado para os \emph{workflows}.
 
 
     \bibliographystyle{bababbr3}
