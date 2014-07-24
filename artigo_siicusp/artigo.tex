@@ -78,7 +78,7 @@
         Neste projeto, portanto, foi desenvolvida uma ferramenta em \emph{Python} capaz de, a partir da descrição de um \emph{workflow} em uma linguagem simples e intuitiva, gerar suas predições de desempenho através da álgebra de processos estocástica \emph{PEPA}, permitindo a otimização de experimentos científicos por usuários não-especialistas. 
     \section*{Abstract}
 
-	\thispagestyle{fancy}
+    \thispagestyle{fancy}
 
     \newpage
     \section*{Introdução}
@@ -92,14 +92,14 @@
 
     \section*{Objetivos}
 
-	Este trabalho aborda o problema da predição de desempenho de workflows científicos, propondo uma ferramenta de software que automatiza a geração de predições baseadas em modelos estocásticos. O objetivo da ferramenta é esconder do usuário final a complexidade associada à criação e análise desse tipo de modelo.
+    Este trabalho aborda o problema da predição de desempenho de workflows científicos, propondo uma ferramenta de software que automatiza a geração de predições baseadas em modelos estocásticos. O objetivo da ferramenta é esconder do usuário final a complexidade associada à criação e análise desse tipo de modelo.
 
-	 A ferramenta -- chamada de \texttt{wkf2pepa} -- gera automaticamente modelos estocásticos a partir de modelos de workflows descritos em uma linguagem bastante simples e de compreensão intuitiva, fácil de ser usada por cientistas de qualquer domínio. A ferramenta obtém a solução numérica dos modelos estocásticos e então extrai índices de desempenho relacionados aos modelos de workflows fornecidos como entrada.
+     A ferramenta -- chamada de \texttt{wkf2pepa} -- gera automaticamente modelos estocásticos a partir de modelos de workflows descritos em uma linguagem bastante simples e de compreensão intuitiva, fácil de ser usada por cientistas de qualquer domínio. A ferramenta obtém a solução numérica dos modelos estocásticos e então extrai índices de desempenho relacionados aos modelos de workflows fornecidos como entrada.
 
     \section*{Materiais e Métodos}
 
         Os modelos de \emph{workflows} usados como entrada para a ferramenta \texttt{wkf2pepa} são descritos textualmente na forma de um grafo dirigido -- uma representação simples e que pode ser usada com facilidade por usuários não especialistas.
-		Para a criação dos modelos estocásticos, optou-se pelo uso da linguagem \emph{PEPA -- Performance Evaluation Process Algebra}, uma álgebra de processos estocástica bem estabelecida e que conta com várias ferramentas de apoio.
+        Para a criação dos modelos estocásticos, optou-se pelo uso da linguagem \emph{PEPA -- Performance Evaluation Process Algebra}, uma álgebra de processos estocástica bem estabelecida e que conta com várias ferramentas de apoio.
 
          Neste trabalho, considera-se que \emph{workflows} sejam compostos por \emph{atividades}, que representam atividades reais de um experimento, e estruturas para descrever o fluxo de controle, como \emph{sequência}, \emph{paralelismo}, \emph{escolha} e \emph{sincronização}, definidas por meio dos operadores \emph{AND} (paralelismo/sincronização), \emph{XOR} (escolha exclusiva/junção) e \emph{OR} (escolha múltipla/junção).
         Para que possua um modelo correspondente em \emph{PEPA}, um modelo de \emph{workflow} precisa ser bem estruturado e não possuir ambiguidades semânticas. Por essa razão, neste trabalho são considerados apenas modelos de \emph{workflow} que apresentam somente um ponto de entrada e um ponto de saída, têm sua estrutura em forma de ``blocos'' e não apresentam ciclos, ou laços.
@@ -120,9 +120,9 @@
 
     \section*{Resultados}
 
-	O código fonte da \texttt{wkf2pepa}, suas dependências, informações sobre o seu uso, exemplos de \emph{workflows} de entrada (e seus respectivos modelos em \emph{PEPA}) podem ser vistos na página do projeto \cite{web:script}.
+    O código fonte da \texttt{wkf2pepa}, suas dependências, informações sobre o seu uso, exemplos de \emph{workflows} de entrada (e seus respectivos modelos em \emph{PEPA}) podem ser vistos na página do projeto \cite{web:script}.
 
-	Ao processar um \emph{workflow}, a ferramenta cria arquivos de saída contendo a descrição do \emph{workflow} em \emph{DOT}, sua representação gráfica, sua descrição em \emph{PEPA} e os índices de desempenho dela extraídos. Um exemplo de descrição de workflow que pode ser usada como entrada para a ferramenta e parte dos resultados de saída gerados para ela são mostrados  na Figura~\ref{fig:exemplo}. Outros exemplos de workflows com estruturas mais complexas e seus respectivos resultados encontram-se na página do projeto \cite{web:script}.
+    Ao processar um \emph{workflow}, a ferramenta cria arquivos de saída contendo a descrição do \emph{workflow} em \emph{DOT}, sua representação gráfica, sua descrição em \emph{PEPA} e os índices de desempenho dela extraídos. Um exemplo de descrição de workflow que pode ser usada como entrada para a ferramenta e parte dos resultados de saída gerados para ela são mostrados  na Figura~\ref{fig:exemplo}. Outros exemplos de workflows com estruturas mais complexas e seus respectivos resultados encontram-se na página do projeto \cite{web:script}.
 
 \begin{figure}[h]
         \centering
@@ -133,7 +133,7 @@
                 \normalsize
                 (a) Descrição do workflow de entrada.\\
 
-                	\scriptsize
+                    \scriptsize
                 \lstinputlisting[tabsize=1]{example.pepa}
                 \normalsize
                 (b) Modelo em PEPA gerado.\\
@@ -141,7 +141,7 @@
         \end{subfigure}%
         ~~%
         \begin{subfigure}[b]{0.4\textwidth}
-		        \centering
+                \centering
                 \includegraphics[scale=0.55]{example-crop.pdf}
 
                 (c) Visualização criada a \\ partir da saída em DOT
@@ -154,13 +154,13 @@
     \newpage
     \section*{Conclusões}
 
-	Este trabalho apresenta a ferramenta de software \texttt{wkf2pepa}, que converte de forma autom\'atica modelos de \emph{workflow} em modelos estocásticos e, a partir destes \'ultimos, extrai predições do desempenho dos \emph{workflows}. A predição do desempenho de workflows é importante porque auxilia a identificação de problemas em sua modelagem e o provisionamento dos recursos necessários para a execução eficiente desses sistemas.
+    Este trabalho apresenta a ferramenta de software \texttt{wkf2pepa}, que converte de forma autom\'atica modelos de \emph{workflow} em modelos estocásticos e, a partir destes \'ultimos, extrai predições do desempenho dos \emph{workflows}. A predição do desempenho de workflows é importante porque auxilia a identificação de problemas em sua modelagem e o provisionamento dos recursos necessários para a execução eficiente desses sistemas.
 
     Os modelos de \emph{workflow} usados como entrada para a \texttt{wkf2pepa} são definidos por meio de uma notaç\~ao textual simples e intuitiva, que permite descrever as estruturas de fluxos de atividades mais comumente encontradas nos experimentos cient\'ificos. Assim, a \texttt{wkf2pepa} possibilita que usuários obtenham predições sobre o desempenho de workflows de forma prática, sem a necessidade de conhecer detalhes sobre modelagem estocástica e análise numérica.
 
     A \texttt{wkf2pepa} gera modelos estocásticos na álgebra de processos \emph{PEPA}. A ferramenta usa a biblioteca \emph{pyPEPA} para obter a solução numérica dos modelos estocásticos e índices de desempenho tais como a taxa de utilização dos componentes do modelo e o rendimento de cada atividade e do workflow como um todo.
 
-	Como trabalhos futuros, pretende-se estender a \texttt{wkf2pepa} para que ela lide com modelos de workflows que incluam uma descrição dos recursos disponíveis para a execução. Com isso, os modelos estocásticos gerados e os índices de desempenho extraídos a partir deles fornecerão uma boa aproximação do desempenho real esperado para os workflows.
+    Como trabalhos futuros, pretende-se estender a \texttt{wkf2pepa} para que ela lide com modelos de workflows que incluam uma descrição dos recursos disponíveis para a execução. Com isso, os modelos estocásticos gerados e os índices de desempenho extraídos a partir deles fornecerão uma boa aproximação do desempenho real esperado para os workflows.
 
 
     \bibliographystyle{bababbr3}
