@@ -19,3 +19,6 @@ workflow*
 
 # Don't ignore any files inside pepa directory
 !pepa/
+
+# Other stuff
+tmp/
