@@ -1,10 +1,9 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,10pt]{article}
 \usepackage{listingsutf8}
 \usepackage{color}
 \usepackage{scalefnt}
 \usepackage{cancel}
 \usepackage{picinpar}
-\usepackage{subfig}
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -13,12 +12,19 @@
 \usepackage[T1]{fontenc}
 \usepackage{setspace}
 \usepackage{caption}
-\usepackage[left=2.5cm,right=2.5cm,top=2.0cm,bottom=1.5cm]{geometry}
+\usepackage[left=2cm,right=2cm,top=3.0cm,bottom=3cm]{geometry}
 \usepackage{siunitx}
 \usepackage[colorlinks=true,linkcolor=black,linktoc=all, urlcolor=black]{hyperref}
 \usepackage{indentfirst}
 \usepackage[nottoc]{tocbibind}
 \usepackage[fixlanguage]{babelbib}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{mdwlist}
+\usepackage{fancyhdr}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
 \selectbiblanguage{brazilian}
 \renewcommand{\lstlistingname}{Código}
 \lstset{
@@ -46,98 +52,115 @@
 
 \date{}
 \title{
-    Uma Ferramenta de Software para a Predição de Desempenho de Workflows Científicos
+    Uma Ferramenta de Software para a Predição de Desempenho de Workflows Científicos\footnote{Este trabalho foi financiado por uma bolsa de iniciação científica CNPq/PIBIC (processo: 155544/2013-6).}
 }
 
 \author{
-    Aluno: Lucas Magno \\
-    Bolsista PIBIC da CNPq \\
-    Instituto de Física (IF) \\
-    \\
-    Orientadora: Kelly Rosa Braghetto\\
-    Departamento de Ciência da Computação (DCC) \\
-    Instituto de Matemática e Estatística (IME) \\
-    \\
-    Universidade de São Paulo \\
-    \href{mailto:lucas.magno@usp.br}{lucas.magno@usp.br}
+\textbf{\textit{Lucas Magno}}$^\dagger$,\textbf{ \textit{Kelly Rosa Braghetto}}$^\ddagger$\\
+\\
+\textit{Universidade de São Paulo} / $^\dagger$\textit{Instituto de Física,} $^\ddagger$\textit{Instituto de Matemática e Estatística}\\
+\\
+\href{mailto:lucas.magno@usp.br}{lucas.magno@usp.br} | \href{mailto:kellyrb@ime.usp.br}{kellyrb@ime.usp.br}
 }
+
+
+\fancyhf{} % sets both header and footer to nothing
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{SIICUSP 2014 -- 22º Simpósio Internacional de Iniciação Científica e Tecnológica da USP }
+
+\pagestyle{fancy}
 
 \begin{document}
     \maketitle
     \section*{Resumo}
-    Este documento descreve as atividades realizadas durante o período de julho de 2013 a junho de 2014 no âmbito do projeto de iniciação científica do aluno Lucas Magno, número USP 7994983, orientado pela Profa. Dra. Kelly Rosa Braghetto e financiado por uma bolsa PIBIC/CNPq.
 
-    O objetivo principal do projeto foi desenvolver uma ferramenta de software para a conversão automática de modelos de \emph{workflows} em modelos estocásticos na álgebra de processos \emph{PEPA - Performance Evaluation Process Algebra} \cite{web:pepa} . A partir desses modelos estocásticos, é possível extrair predições de desempenho de \emph{workflows}.
+
     \section*{Abstract}
+
+	\thispagestyle{fancy}
 
     \newpage
     \section*{Introdução}
         Inicialmente desenvolvidos para automatizar processos industriais e empresariais, os \emph{workflows} se popularizaram e passaram a ser usados na modelagem e automatização de experimentos científicos em diversas áreas da ciência. Um \emph{workflow científico} é a descrição completa ou parcial de um experimento científico em termo de suas atividades, controles de fluxo e dependência de dados \cite{phd:gadelha12}.
 
-        Há várias maneiras de se representar um \emph{workflow científico}, entre elas \emph{grafos direcionados}, \emph{UML \emph{(Unified Modeling Language)}}, \emph{redes de Petri} e \emph{álgebras de processo} \cite{phd:oga11}:. Estes mecanismos de representação são usados para criar modelos que especificam a ordem de execução das atividades dos \emph{workflows}. Além disso, as redes de Petri e as álgebras de processo são linguagens formais, permitindo que se verifiquem propriedades qualitativas e quantitativas dos modelos de \emph{workflow}. Neste trabalho, no entando, somente foram utilizados grafos direcionados e álgebras de processo.
+        Por ser comum em workflows científicos a manipulação de enormes quantidades de dados e a presença de processos que consomem muitos recursos computacionais, ferramentas que forneçam predições de desempenho desse tipo de sistema fazem-se necessárias. As predições auxiliam na escolha dos recursos computacionais apropriados para a execução e na identificação de possíveis problemas na modelagem dos workflows, possibilitando assim execuções mais eficientes.
 
-    Para simplificar sua implementação, considera-se que \emph{workflows} sejam compostos por \emph{atividades}, que representam atividades reais de um experimento, e estruturas para descrever o fluxo de controle, como \emph{sequência}, \emph{paralelismo}, \emph{escolha} e \emph{sincronização}, definidas por meio dos operadores \emph{AND} (paralelismo/sincronização), \emph{XOR} (escolha exclusiva/junção) e \emph{OR} (escolha múltipla/junção).
+        Há várias maneiras de se representar um \emph{workflow científico}, como, por exemplo, por meio de \emph{grafos direcionados}, \emph{UML \emph{(Unified Modeling Language)}}, \emph{redes de Petri} e \emph{álgebras de processos} \cite{phd:oga11}. Estes mecanismos de representação são usados para criar modelos que especificam a ordem de execução das atividades pertencentes aos \emph{workflows}. Linguagens formais como as redes de Petri e as álgebras de processos, vão além de uma simples representação, pois permitem também que se verifique propriedades qualitativas e quantitativas dos modelos de \emph{workflow} nelas representados. Em particular, extensões estocásticas dessas linguagens frequentemente são usadas para a criação de modelos preditivos do desempenho de sistemas computacionais.
 
-        Por ser comum em experimentos científicos a manipulação de de enormes quantidades de dados e a presença de processos muito demorados, é necessária a análise do desempenho dos \emph{workflows} associados, que pode ser feita através de \emph{medição}, \emph{simulação} ou \emph{modelagem analítica} \cite{phd:kelly11}. Foi escolhida, então, a modelagem analítica, um método preditivo e rápido, implementada por meio de uma álgebra de processos estocástica, a \emph{PEPA}, pois seu uso ainda não foi profundamente explorado para a análise de desempenho preditiva de \emph{workflows} científicos.
+        Apesar dos inúmeros benefícios que esses formalismos podem trazer à modelagem de workflows, o seu uso na prática impõe algumas dificuldades.  Ele exige que o usuário tenha familiaridade com linguagens e modelos estocásticos (de compreensão pouco intuitiva) e com seus programas de simulação ou análise numérica. No entanto, os \emph{workflows} científicos são criados e manipulados por cientistas das mais diversas áreas da ciência e que, geralmente, não são especialistas em computação.
 
     \section*{Objetivos}
 
-        Uma desvantagem da modelagem analítica usando \emph{PEPA} é a necessidade da descrição do \emph{workflow} em uma linguagem de modelagem estocástica e utilização de programas específicos para a análise, exigindo do usuário um certo nível de conhecimento sobre álgebras de processo. No entanto, \emph{workflows} científicos são utilizados em diversas áreas da ciência que não necessitam de um grande aprofundamento em computação, o que pode inviabilizar a aplicação deste método.
+	Este trabalho aborda o problema da predição de desempenho de workflows científicos, propondo uma ferramenta de software que automatiza a geração de predições baseadas em modelos estocásticos. O objetivo da ferramenta é esconder do usuário final a complexidade associada à criação e análise desse tipo de modelo.
 
-        O objetivo do trabalho foi facilitar a extração de predições de desempenho para \emph{workflows} científicos. Para isso, foi desenvolvida uma ferramenta de software que gera modelos estocásticos em \emph{PEPA} e sua solução numérica a partir de modelos de \emph{workflows}.
-
-        Os modelos de \emph{workflows} usados como entrada para a ferramenta são descritos textualmente na forma de um grafo dirigido - uma representação simples e que pode ser usada com facilidade por usuários não especialistas. Além do modelo em \emph{PEPA} e sua solução, a ferramenta também gera uma representação gráfica do modelo de \emph{workflow}, que permite que o usuário possa verificá-lo mais facilmente.
+	 A ferramenta -- chamada de \texttt{wflow2pepa} -- gera automaticamente modelos estocásticos a partir de modelos de workflows descritos em uma linguagem bastante simples e de compreensão intuitiva, fácil de ser usada por cientistas de qualquer domínio. A ferramenta obtém a solução numérica dos modelos estocásticos e então extrai índices de desempenho relacionados aos modelos de workflows fornecidos como entrada.
 
     \section*{Materiais e Métodos}
-        Para que possua um modelo correspondente em \emph{PEPA}, um modelo de \emph{workflow} precisa ser bem estruturado e não possuir ambiguidades semânticas. Por essa razão, neste trabalho consideramos apenas modelos de \emph{workflow} que apresentam somente um ponto de entrada e um ponto de saída, têm sua estrutura em forma de ``blocos''  e não apresentam ciclos, ou laços, o que permite uma implementação mais simples.
 
-        Para automatizar o processo de predição de desempenho, foi implementado um programa na linguagem \emph{Python} (versão 2.7), por flexibilidade, facilidade de aprendizado e grande número de bibliotecas auxiliares. Seu código fonte, detalhes de sua execução, dependências e exemplos de \emph{workflow} de entrada e suas representações em \emph{PEPA} geradas podem ser conferidos na página do projeto \cite{web:script}.
+        Os modelos de \emph{workflows} usados como entrada para a ferramenta \texttt{wflow2pepa} são descritos textualmente na forma de um grafo dirigido -- uma representação simples e que pode ser usada com facilidade por usuários não especialistas.
+		Para a criação dos modelos estocásticos, optou-se pelo uso da linguagem \emph{PEPA -- Performance Evaluation Process Algebra}, uma álgebra de processos estocástica bem estabelecida e que conta com várias ferramentas de apoio.
 
-        \newpage
-        O programa pode ser resumido nas seguintes etapas:
+         Neste trabalho, considera-se que \emph{workflows} sejam compostos por \emph{atividades}, que representam atividades reais de um experimento, e estruturas para descrever o fluxo de controle, como \emph{sequência}, \emph{paralelismo}, \emph{escolha} e \emph{sincronização}, definidas por meio dos operadores \emph{AND} (paralelismo/sincronização), \emph{XOR} (escolha exclusiva/junção) e \emph{OR} (escolha múltipla/junção).
+        Para que possua um modelo correspondente em \emph{PEPA}, um modelo de \emph{workflow} precisa ser bem estruturado e não possuir ambiguidades semânticas. Por essa razão, neste trabalho são considerados apenas modelos de \emph{workflow} que apresentam somente um ponto de entrada e um ponto de saída, têm sua estrutura em forma de ``blocos'' e não apresentam ciclos, ou laços.
 
-        \begin{enumerate}
-            \item Lê como entrada uma descrição textual de um \emph{workflow} em uma gramática simples baseada na linguagem \emph{DOT} \cite{web:dot} através dos analisadores léxico e sintático gerados a partir da biblioteca \emph{PLY}, \emph{Python Lex-Yacc} \cite{web:ply}.
-            \item Gera uma estrutura de dados baseada em grafo na memória representando o \emph{workflow} através de classes explicitamente definidas que permitem a manipulação de nós, arestas e \emph{workflows}.
-            \item Gera uma uma descrição do \emph{workflow} de entrada em linguagem \emph{DOT} e sua visualização através da biblioteca \emph{Graphviz} \cite{web:graphviz}.
-            \item Gera um modelo analítico do \emph{workflow} em \emph{PEPA}
-            \item Gera a solução numérica do modelo analítico e extrai seus índices de desempenho através da biblioteca \emph{pyPEPA} \cite{web:pypepa}, uma implementação recente da \emph{PEPA} em \emph{Python}.
-        \end{enumerate}
+        A \texttt{wflow2pepa} foi implementada na linguagem \emph{Python}. Ela usa a bibllioteca \emph{pyPEPA}\cite{web:pypepa}, uma implementação recente de um solucionador para \emph{PEPA} em \emph{Python}, para calcular as probabilidades no regime estacion\'ario de cada um dos estados poss\'iveis do \emph{workflow} descrito no modelo em \emph{PEPA}. A partir dessas probabilidades, a \emph{pyPEPA} consegue fornecer o rendimento (\emph{throughput}) das atividades do \emph{workflow} e também a taxa de utilizaç\~ao de seus componentes.
+
+        Além do modelo em \emph{PEPA} e sua solução, a \texttt{wflow2pepa} também gera uma representação gráfica do modelo de \emph{workflow}, que permite que o usuário possa verificá-lo mais facilmente.
+
+        O funcionamento completo da ferramenta \texttt{wflow2pepa} pode ser descrito pelos seguintes passos:
+        \begin{enumerate*}
+            \item Recebe como entrada uma descrição textual (modelo) de um \emph{workflow} que segue uma sintaxe simples, criada com base na linguagem \emph{DOT} \cite{web:dot};
+            \item Por meio de analisadores léxico e sintático gerados com a biblioteca \emph{PLY} (\emph{Python Lex-Yacc}) \cite{web:ply}, lê o modelo de workflow e gera uma representação em memória dele. Essa representação, baseada em grafos, é feita através de classes criadas na ferramenta para a manipulação de nós, arestas e \emph{workflows}.
+            \item Gera uma descrição do \emph{workflow} de entrada em linguagem \emph{DOT} e sua representação gráfica (visualização) através da biblioteca \emph{Graphviz} \cite{web:graphviz}.
+            \item Gera um modelo analítico (estocástico) do \emph{workflow} na linguagem \emph{PEPA}.
+            \item Gera a solução numérica do modelo analítico e extrai os índices de desempenho com a  \emph{pyPEPA} .
+        \end{enumerate*}
+
 
     \section*{Resultados}
 
-        Ao processar um \emph{workflow}, então, o programa cria arquivos de saída contendo a descrição do \emph{workflow} em \emph{DOT}, sua visualização, sua descrição em \emph{PEPA} e os índices de desempenho dela extraídos. Estes arquivos, entretanto, são geralmente muito extensos, então serão mostrados aqui somente um exemplo de \emph{workflow} de entrada e sua visualização. Demais exemplos estão disponíveis na página do projeto.\\
+	O código fonte da \texttt{wflow2pepa}, suas dependências, informações sobre o seu uso, exemplos de \emph{workflows} de entrada (e seus respectivos modelos em \emph{PEPA}) podem ser vistos na página do projeto \cite{web:script}.
 
-        \begin{minipage}[c]{0.6\textwidth}
-            \centering
-            \lstinputlisting[caption={Exemplo de descrição do \emph{workflow} de entrada},label=lst:dot,tabsize=2]{example}
-        \end{minipage}%
-        \begin{minipage}[r]{0.4\textwidth}
-            \centering
-            \includegraphics[width=0.65\linewidth]{example.pdf}
-            \captionof{figure}{Exemplo de visualização do \emph{workflow} criada a partir do código em DOT}
-            \label{fig:pdf}
-        \end{minipage}
+	Ao processar um \emph{workflow}, a ferramenta cria arquivos de saída contendo a descrição do \emph{workflow} em \emph{DOT}, sua representação gráfica, sua descrição em \emph{PEPA} e os índices de desempenho dela extraídos. Um exemplo de descrição de workflow que pode ser usada como entrada para a ferramenta e parte dos resultados de saída gerados para ela são mostrados  na Figura~\ref{fig:exemplo}. Outros exemplos de workflows com estruturas mais complexas e seus respectivos resultados encontram-se na página do projeto \cite{web:script}.
+
+\begin{figure}[h]
+        \centering
+
+        \begin{subfigure}[b]{0.6\textwidth}
+                \footnotesize
+                \lstinputlisting[tabsize=1]{example}
+                \normalsize
+                (a) Descrição do \emph{workflow} de entrada.\\
+
+                	\scriptsize
+                \lstinputlisting[tabsize=1]{example.pepa}
+                \normalsize
+                (b) Modelo em PEPA gerado.\\
+
+        \end{subfigure}%
+        ~~%
+        \begin{subfigure}[b]{0.4\textwidth}
+		        \centering
+                \includegraphics[scale=0.55]{example-crop.pdf}
+
+                (c) Visualização criada a \\ partir da saída em DOT
+                \label{fig:tiger}
+        \end{subfigure}
+        \caption{Exemplo de uma execução da \texttt{wflow2pepa}.}
+        \label{fig:exemplo}
+\end{figure}\\
+
     \newpage
     \section*{Conclusões}
 
-        Neste projeto de iniciação científica, foi desenvolvida uma ferramenta de software que converte de forma automática modelos de \emph{workflow} em modelos estocásticos e, a partir destes últimos, extrai medidas de desempenho dos \emph{workflows}, facilitando o uso de ferramentas de predição por usuários não-especialistas.
+	Este trabalho apresenta a ferramenta de software \texttt{wflow2pepa}, que converte de forma autom\'atica modelos de \emph{workflow} em modelos estocásticos e, a partir destes \'ultimos, extrai predições do desempenho dos \emph{workflows}. A predição do desempenho de workflows é importante porque auxilia a identificação de problemas em sua modelagem e o provisionamento dos recursos necessários para a execução eficiente desses sistemas.
 
-        Os modelos de \emph{workflow} recebidos como entrada para o programa são definidos por meio de uma notação simples que permite descrever os modelos mais comuns de experimentos científicos.
+    Os modelos de \emph{workflow} usados como entrada para a \texttt{wflow2pepa} são definidos por meio de uma notaç\~ao textual simples e intuitiva, que permite descrever as estruturas de fluxos de atividades mais comumente encontradas nos experimentos cient\'ificos. Assim, a \texttt{wflow2pepa} possibilita que usuários obtenham predições sobre o desempenho de workflows de forma prática, sem a necessidade de conhecer detalhes sobre modelagem estocástica e análise numérica.
 
-        Para a geração dos modelos estocásticos, usou-se a linguagem \emph{PEPA}, capaz de descrever uma grande variedade de processos, embora tenha uma sintaxe complexa. A análise numérica desses modelos foi feita por meio da biblioteca \emph{pyPEPA}, uma implementação recente de \emph{PEPA} em \emph{Python}.
+    A \texttt{wflow2pepa} gera modelos estocásticos na álgebra de processos \emph{PEPA}. A ferramenta usa a biblioteca \emph{pyPEPA} para obter a solução numérica dos modelos estocásticos e índices de desempenho tais como a taxa de utilização dos componentes do modelo e o rendimento de cada atividade e do workflow como um todo.
 
-        A escolha de \emph{Python} como linguagem de implementação do programa se provou bastante favorável, já que as estruturas de dados e bibliotecas existentes nessa linguagem agilizaram o desenvolvimento das funcionalidades primárias do programa.
+	Como trabalhos futuros, pretende-se estender a \texttt{wflow2pepa} para que ela lide com modelos de workflows que incluam uma descrição dos recursos disponíveis para a execução. Com isso, os modelos estocásticos gerados e os índices de desempenho extraídos a partir deles fornecerão uma boa aproximação do desempenho real esperado para os workflows.
 
-        A complexidade da sintaxe da PEPA, entretanto, dificultou a conversão dos modelos de workflow, pois exigiu o tratamento de diversas especificidades desta. Além disso, a implementação recente da pyPEPA apresentou diversos obstáculos durante o projeto, como sua sintaxe muito restritiva (ela ainda não suporta completamente a sintaxe da PEPA) e sua documentação escassa.
-
-        Por estes motivos, as etapas relativas a essas ferramentas ocuparam grande parte do cronograma do projeto, não sendo possível, portanto, realizar outras funcionalidades inicialmente sugeridas neste trabalho, mas que ainda são interessantes de se implementar, como por exemplo:
-        \begin{itemize}
-            \item Gerar modelos analíticos de \emph{workflows} que contenham o operador \emph{OR}
-            \item Definição de uma linguagem para descrição dos recursos que podem ser utilizados por um \emph{workflow}
-            \item Incorporação de informações sobre recursos nos modelos analíticos
-            \item Permitir a descrição de \emph{workflows} cuja estrutura não seja ``em blocos''
-        \end{itemize}
 
     \bibliographystyle{bababbr3}
     \bibliography{references}
