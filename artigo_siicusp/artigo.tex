@@ -72,18 +72,18 @@
 
 \begin{document}
 
-\parindent=0mm 
+\parindent=0mm
 
     \maketitle
 
-\vspace{-0.5cm}    
-    
+\vspace{-0.5cm}
+
     \section*{Resumo}
 
 Os experimentos científicos da atualidade frequentemente lidam com grandes quantidades de dados, cujo processamento demanda muitos recursos computacionais. A análise do desempenho dos sistemas computacionais que automatizam esses experimentos -- os \textit{workflows científicos} -- é importante, pois auxilia no provisionamento dos recursos necessários para garantir sua execução eficiente. Nesse contexto, métodos de análise que possibilitem a predição do desempenho de workflows são de particular interesse. Geralmente, esse tipo de método se baseia em modelos definidos por meio de linguagens formais estocásticas. Entretanto, o uso dessas linguagens requer familiaridade com conceitos complexos, que não são de fácil entendimento para usuários não-especialistas. Este trabalho apresenta a ferramenta de software \texttt{wkf2pepa}, que converte de forma autom\'atica modelos de \emph{workflow} em modelos estocásticos na álgebra de processos \emph{PEPA -- Performance Evaluation Process Algebra} e, a partir destes \'ultimos, extrai índices do desempenho tais como a utilização dos recursos e o rendimento do \emph{workflow} e de suas atividades componentes. Os modelos de \emph{workflow} usados como entrada para a \texttt{wkf2pepa} são definidos em notaç\~ao textual simples e intuitiva, que permite descrever as estruturas de fluxos de atividades mais comumente encontradas nos experimentos cient\'ificos. Assim, a \texttt{wkf2pepa} possibilita que usuários obtenham predições sobre o desempenho de \emph{workflows} de forma prática, sem a necessidade de conhecer detalhes sobre modelagem estocástica e análise numérica.\\
 
 \noindent \textbf{Palavras-chaves:} workflows científicos, predição de desempenho, modelos estocásticos
-        
+
     \section*{Abstract}
 
 
@@ -114,7 +114,7 @@ Nowadays, scientific experiments often handle large amounts of data, whose proce
         Os modelos de \emph{workflows} usados como entrada para a ferramenta \texttt{wkf2pepa} são descritos textualmente na forma de um grafo dirigido -- uma representação simples e que pode ser usada com facilidade por usuários não especialistas.
         Para a criação dos modelos estocásticos, optou-se pelo uso da linguagem \emph{PEPA -- Performance Evaluation Process Algebra}, uma álgebra de processos estocástica bem estabelecida e que conta com várias ferramentas de apoio.
 
-         Neste trabalho, considera-se que \emph{workflows} sejam compostos por \emph{atividades}, que representam atividades reais de um experimento, e estruturas para descrever o fluxo de controle, como \emph{sequência}, \emph{paralelismo}, \emph{escolha} e \emph{sincronização}, definidas por meio dos operadores \emph{AND} (paralelismo/sincronização), \emph{XOR} (escolha exclusiva/junção) e \emph{OR} (escolha múltipla/junção).
+         Neste trabalho, considera-se que \emph{workflows} sejam compostos por \emph{atividades}, que representam atividades reais de um experimento e estão associadas a taxas de execução, e estruturas para descrever o fluxo de controle, como \emph{sequência}, \emph{paralelismo}, \emph{escolha} e \emph{sincronização}, definidas por meio dos operadores \emph{AND} (paralelismo/sincronização), \emph{XOR} (escolha exclusiva/junção) e \emph{OR} (escolha múltipla/junção).
         Para que possua um modelo correspondente em \emph{PEPA}, um modelo de \emph{workflow} precisa ser bem estruturado e não possuir ambiguidades semânticas. Por essa razão, neste trabalho são considerados apenas modelos de \emph{workflow} que apresentam somente um ponto de entrada e um ponto de saída, têm sua estrutura em forma de ``blocos'' e não apresentam ciclos, ou laços.
 
         A \texttt{wkf2pepa} foi implementada na linguagem \emph{Python}. Ela usa a bibllioteca \emph{pyPEPA}~\cite{web:pypepa}, uma implementação recente de um solucionador para \emph{PEPA} em \emph{Python}, para calcular as probabilidades no regime estacion\'ario de cada um dos estados poss\'iveis do \emph{workflow} descrito no modelo em \emph{PEPA}. A partir dessas probabilidades, a \emph{pyPEPA} consegue fornecer o rendimento (\emph{throughput}) das atividades do \emph{workflow} e também a taxa de utilizaç\~ao de seus componentes.
