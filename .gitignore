@@ -16,6 +16,8 @@ workflow*
 *.bbl
 *.blg
 *.out
+*.nav
+*.snm
 
 # Don't ignore any files inside pepa directory
 !pepa/
