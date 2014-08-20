@@ -25,7 +25,7 @@
 % Beamer Layout %%%%%%%%%%%%%%%%%
 \useoutertheme[subsection=false,shadow]{miniframes}
 \useinnertheme{default}
-\usefonttheme{serif}
+\usefonttheme[mathserif]{serif}
 \usepackage{palatino}
 
 \setbeamerfont{title like}{shape=\scshape}
@@ -50,15 +50,14 @@
 
 
 
-\date{}
-\title{\LARGE Uma Ferramenta de Software para a Predição de Desempenho
+\title{Uma Ferramenta de Software para a Predição de Desempenho
 de Workflows Científicos}
-\author{
-    Lucas Magno\\
-    Kelly Rosa Braghetto \\[1.5cm]
-    Bolsa PIBIC CNPq\\[0.2cm]
-    Universidade de São Paulo
+\author{%
+    Lucas Magno \\ Kelly Rosa Braghetto
 }
+\institute{Universidade de São Paulo}
+\date{SIICUSP 2014}
+
 \begin{document}
 
 
@@ -69,128 +68,5 @@ de Workflows Científicos}
 \end{frame}
 
 \section{\scshape Introdução}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Objetivos}
-
-\begin{frame}{Objetivos}
-    \begin{itemize}
-        \item Observar a constante elástica resultante de sistemas de molas
-        \item Comparar com previsões teóricas a partir das constantes individuais
-        \item Verificar o intervalo de validade do modelo teórico
-    \end{itemize}
-\end{frame}
-
-
-
-\subsection{Modelos teóricos}
-
-\begin{frame}{Modelos teóricos}
-    \begin{itemize}
-        \item Molas em paralelo
-            \[ K_{R} = K_{1}+K_{2}\]
-        \item Molas em série
-            \[ \frac{1}{K_{R}} = \frac{1}{K_{1}} + \frac{1}{K_{2}} \]
-        \item Gráfico
-            \[M = \frac{K_{R}}{g}X\]
-    \end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{\scshape Métodos}
-
-
-\subsection{Aparato Experimental}
-
-\begin{frame}{Aparato Experimental}
-    \begin{itemize}
-        \item Molas
-        \item Pesos
-        \item Suporte vertical para as molas
-        \item Réguas
-        \item Máquina fotográfica
-    \end{itemize}
-\end{frame}
-
-
-
-\subsection{Procedimento}
-
-\begin{frame}{Procedimento}
-    \begin{itemize}
-        \item Método estático
-        \item Diferentes combinações de molas
-        \item Variação dos pesos
-        \item Registro fotográfico das posições
-        \item Criação de gráficos e análise destes
-    \end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{\scshape Análise}
-
-
-\subsection{Primeiro Ajuste}
-
-\begin{frame}{Primeiro Ajuste}
-    \begin{itemize}
-        \item Gráfico\\
-            \includegraphics{M1+3.png}
-    \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Primeiro Ajuste}
-    \begin{itemize}
-        \item Previsão teórica: \[K_{R} = 13.21 \pm 0.14 \quad N/m\]
-        \item Obtido: \[K_{R} = 12.31 \pm 0.18 \quad N/m\]\\
-            \[Z = 3.99\]\\
-            \[\frac{\chi^{2}}{NDF} = 6.14\]
-    \end{itemize}
-\end{frame}
-
-
-
-\subsection{Segundo Ajuste}
-
-\begin{frame}{Segundo Ajuste}
-    \begin{itemize}
-        \item Gráfico\\
-            \includegraphics{M1+3Linear.png}
-    \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Segundo Ajuste}
-    \begin{itemize}
-        \item Previsão teórica: \[K_{R} = 11.56 \pm 0.35 \quad N/m\]
-        \item Obtido: \[K_{R} = 11.22 \pm 0.32 \quad N/m\]\\
-            \[Z = 0.72\]\\
-            \[\frac{\chi^{2}}{NDF} = 0.58\]
-    \end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{\scshape Conclusão}
-
-
-\subsection{Conclusão}
-
-\begin{frame}{Conclusão}
-    \begin{itemize}
-        \item Massa mínima para comportamento linear
-        \item Massa máxima a fim de evitar deformação
-        \item Excelente compatibilidade entre o sistema e o modelo teórico no intervalo apropriado
-    \end{itemize}
-\end{frame}
 
 \end{document}
