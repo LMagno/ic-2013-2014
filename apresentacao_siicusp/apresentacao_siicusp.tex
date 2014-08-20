@@ -247,6 +247,7 @@ digraph workflow1 {
                     \begin{itemize}
                         \item<4-> Bem desenvolvida
                         \item<4-> Ferramentas de apoio
+                        \item<4-> Cadeia de Markov
                     \end{itemize}
             \end{itemize}
         \end{frame}
@@ -280,8 +281,42 @@ P <and1, and2> (P_and1_e <and1, and2> P_and1_xor1)
 
     \subsection{Extração dos Índices de Desempenho}
         \begin{frame}{Extração dos Índices de Desempenho}
-
+            \begin{itemize}[<+->]
+                \item \emph{pyPEPA}
+                \item Probabilidades dos estados no regime estacionário
+                \item Rendimentos (\emph{throughput})
+                \item Taxas de utilização
+            \end{itemize}
         \end{frame}
+
+\begin{frame}[fragile]{Extração dos Índices de Desempenho}
+    \framesubtitle{Exemplo}
+    \begin{lstlisting}[basicstyle=\tiny]
+Throughput:
+xor1   -2.62364490393e-16
+c        9.38551843388e-18
+xor2     7.5563162709e-20
+e        0.49504950495
+and1     0.49504950495
+and2     0.49504950495
+
+Utilization:
+P                  1.0
+
+P_and1_e           0.0049504950495
+(and2              0.0049504950495
+(e                 0.990099009901
+
+P_xor1_d           0.0049504950495
+P_xor1_c           3.43509599203e-20
+P_xor1           -6.60131287319e-19
+r_AND).P_and1_e    0.0049504950495
+P_xor2             3.49163606874e-22
+(and2              4.07395329479e-22
+r_e).((and2        0.990099009901
+P_and1_xor1      -1.31596606031e-18
+    \end{lstlisting}
+\end{frame}
 
 \section{\scshape Resultados}
 

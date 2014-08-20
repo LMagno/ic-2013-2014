@@ -1,25 +1,27 @@
-\frametitle{Modelagem Analítica}
+\frametitle{Extração dos Índices de Desempenho}
 \framesubtitle{Exemplo}
     \begin{lstlisting}[basicstyle=\tiny]
-r_a = 1.0; r_b = 1.0; r_e = 0.5;
-r_c = 1.0; r_d = 1.0; r_f = 1.0;
+Throughput:
+xor1   -2.62364490393e-16
+c        9.38551843388e-18
+xor2     7.5563162709e-20
+e        0.49504950495
+and1     0.49504950495
+and2     0.49504950495
 
-r_AND = 100.0; r_XOR = 100.0; r_OR  = 100.0;
+Utilization:
+P                  1.0
 
-prob_xor1_c = 0.15;
-prob_xor1_d = 0.85;
+P_and1_e           0.0049504950495
+(and2              0.0049504950495
+(e                 0.990099009901
 
-r_xor1_c = prob_xor1_c * r_XOR;
-r_xor1_d = prob_xor1_d * r_XOR;
-
-P = (a, r_a) . (b, r_b) . (and1, r_AND) . (and2, r_AND) . (f, r_f) . P;
-
-P_and1_e = (and1, r_AND) . (e, r_e) . (and2, r_AND) . P_and1_e;
-P_and1_xor1 = (and1, r_AND) . P_xor1;
-P_xor1_c = (c, r_c) . P_xor2;
-P_xor1_d = (d, r_d) . P_xor2;
-P_xor1 = (xor1, r_xor1_c) . P_xor1_c + (xor1, r_xor1_d) . P_xor1_d;
-P_xor2 = (xor2, r_XOR) . (and2, r_AND) . P_and1_xor1;
-
-P <and1, and2> (P_and1_e <and1, and2> P_and1_xor1)
+P_xor1_d           0.0049504950495
+P_xor1_c           3.43509599203e-20
+P_xor1           -6.60131287319e-19
+r_AND).P_and1_e    0.0049504950495
+P_xor2             3.49163606874e-22
+(and2              4.07395329479e-22
+r_e).((and2        0.990099009901
+P_and1_xor1      -1.31596606031e-18
     \end{lstlisting}
