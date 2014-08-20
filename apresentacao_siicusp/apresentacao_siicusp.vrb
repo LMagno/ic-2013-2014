@@ -1,11 +1,27 @@
-\frametitle{Descrição do Workflow}
+\frametitle{Visualização do Workflow}
 \framesubtitle{Exemplo}
-    \begin{lstlisting}
-digraph {
-    a          -> xor1;
-    xor1 [xor] -> [0.15] c, [0.85] d;
-    c [0.5]    -> xor2;
-    d          -> xor2;
-    xor2       -> f;
+    \begin{columns}[c]
+        \begin{column}[l]{5cm}
+        \begin{lstlisting}[basicstyle=\tiny]
+digraph workflow1 {
+    a    [shape=box,label=a];
+    xor1 [shape=diamond,label=xor1,color=green];
+    c    [shape=box,label=c];
+    xor2 [shape=diamond,label=xor2,color=green];
+    d    [shape=box,label=d];
+    f    [shape=box,label=f];
+    a    -> xor1;
+    c    -> xor2;
+    xor2 -> f;
+    xor1 -> d [label="0.85"];
+    xor1 -> c [label="0.15"];
+    d    -> xor2;
 }
-    \end{lstlisting}
+        \end{lstlisting}
+        \end{column}
+
+        \begin{column}{5cm}
+            \hfill
+            \includegraphics[width=3.5cm]{workflow2.pdf}
+        \end{column}
+    \end{columns}
