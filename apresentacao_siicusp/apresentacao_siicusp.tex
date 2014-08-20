@@ -32,6 +32,7 @@
 \setbeamerfont{frametitle}{shape=\scshape}
 
 \definecolor{azulzinho}{RGB}{248,249,254}
+\setbeamercolor{footlinecolor}{bg=azulzinho}
 \setbeamercolor*{background canvas}{bg=azulzinho}
 \setbeamercolor*{lower separation line head}{bg=DeepSkyBlue4}
 \setbeamercolor*{normal text}{fg=black,bg=white}
@@ -46,6 +47,18 @@
 \renewcommand{\)}{\end{columns}}
 \newcommand{\<}[1]{\begin{column}{#1}}
 \renewcommand{\>}{\end{column}}
+
+\beamertemplatenavigationsymbolsempty
+\setbeamertemplate{footline}{%
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=\paperwidth, ht=2.25ex, dp=1ex, right]{footlinecolor}%
+            \usebeamerfont{title in head/foot} SIICUSP 2014 – 22º Simpósio Internacional de Iniciação Científica e Tecnológica da USP%
+            \hspace{0.3cm}
+        \end{beamercolorbox}%
+    }%
+    \vskip0pt%
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -53,7 +66,7 @@
 \title{Uma Ferramenta de Software para a Predição de Desempenho de Workflows Científicos}
 \author{Lucas Magno\inst{1} \\ Kelly Rosa Braghetto\inst{2}}
 \institute{\inst{1} Instituto de Física \\ \inst{2} Instituto de Matemática e Estatística \\[0.2cm] Universidade de São Paulo}
-\date{SIICUSP 2014}
+\date{PIBIC/CNPq}
 
 \begin{document}
 
