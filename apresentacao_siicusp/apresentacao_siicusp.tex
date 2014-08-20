@@ -19,6 +19,8 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{url}
+\usepackage{listings}
+\usepackage{verbatim}
 \usetikzlibrary{decorations.fractals}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -58,6 +60,11 @@
         \end{beamercolorbox}%
     }%
     \vskip0pt%
+}
+
+\lstset{numbers=left,
+        numberstyle=\tiny,
+        showstringspaces=false,
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -137,9 +144,26 @@
             \end{itemize}
         \end{frame}
 
+    %\subsection{Descrição do Workflow, exemplo}
+\begin{frame}[fragile]{Descrição do Workflow}
+    \framesubtitle{Exemplo}
+    \begin{lstlisting}
+digraph {
+    a          -> xor1;
+    xor1 [xor] -> [0.15] c, [0.85] d;
+    c [0.5]    -> xor2;
+    d          -> xor2;
+    xor2       -> f;
+}
+    \end{lstlisting}
+\end{frame}
+
     \subsection{Leitura do Workflow de Entrada}
         \begin{frame}{Leitura do Workflow de Entrada}
-
+            \begin{itemize}
+                \item Analisadores léxico (\emph{lexer}) e sintático (\emph{parser})
+                \item PLY - \emph{Python Lex-Yacc}
+            \end{itemize}
         \end{frame}
 
     \subsection{Estrutura de Dados baseada em Grafo}
@@ -165,9 +189,7 @@
 \section{\scshape Resultados}
 
     \subsection{Descrição do Workflow}
-        \begin{frame}{Descrição do Workflow}
 
-        \end{frame}
 
     \subsection{Visualização do Workflow}
         \begin{frame}{Visualização do Workflow}

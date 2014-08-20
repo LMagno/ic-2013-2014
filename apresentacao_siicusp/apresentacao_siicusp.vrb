@@ -1,0 +1,11 @@
+\frametitle{Descrição do Workflow}
+\framesubtitle{Exemplo}
+    \begin{lstlisting}
+digraph {
+    a          -> xor1;
+    xor1 [xor] -> [0.15] c, [0.85] d;
+    c [0.5]    -> xor2;
+    d          -> xor2;
+    xor2       -> f;
+}
+    \end{lstlisting}

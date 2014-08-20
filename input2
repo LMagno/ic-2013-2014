@@ -1,7 +1,7 @@
 digraph {
-    a -> or_a;
-    or_a [or] -> [0.15] b, [0.85] c;
-    b -> or_b;
-    c -> or_b;
-    or_b -> d;
+	a 		-> xor1;
+	xor1 [xor] 	-> [0.15] c, [0.85] d;
+	c 		-> xor2;
+	d 		-> xor2;
+	xor2  		-> f;
 }
