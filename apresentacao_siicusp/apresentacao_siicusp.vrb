@@ -1,27 +1,25 @@
-\frametitle{Visualização do Workflow}
+\frametitle{Modelagem Analítica}
 \framesubtitle{Exemplo}
-    \begin{columns}[c]
-        \begin{column}[l]{5cm}
-        \begin{lstlisting}[basicstyle=\tiny]
-digraph workflow1 {
-    a    [shape=box,label=a];
-    xor1 [shape=diamond,label=xor1,color=green];
-    c    [shape=box,label=c];
-    xor2 [shape=diamond,label=xor2,color=green];
-    d    [shape=box,label=d];
-    f    [shape=box,label=f];
-    a    -> xor1;
-    c    -> xor2;
-    xor2 -> f;
-    xor1 -> d [label="0.85"];
-    xor1 -> c [label="0.15"];
-    d    -> xor2;
-}
-        \end{lstlisting}
-        \end{column}
+    \begin{lstlisting}[basicstyle=\tiny]
+r_a = 1.0; r_b = 1.0; r_e = 0.5;
+r_c = 1.0; r_d = 1.0; r_f = 1.0;
 
-        \begin{column}{5cm}
-            \hfill
-            \includegraphics[width=3.5cm]{workflow2.pdf}
-        \end{column}
-    \end{columns}
+r_AND = 100.0; r_XOR = 100.0; r_OR  = 100.0;
+
+prob_xor1_c = 0.15;
+prob_xor1_d = 0.85;
+
+r_xor1_c = prob_xor1_c * r_XOR;
+r_xor1_d = prob_xor1_d * r_XOR;
+
+P = (a, r_a) . (b, r_b) . (and1, r_AND) . (and2, r_AND) . (f, r_f) . P;
+
+P_and1_e = (and1, r_AND) . (e, r_e) . (and2, r_AND) . P_and1_e;
+P_and1_xor1 = (and1, r_AND) . P_xor1;
+P_xor1_c = (c, r_c) . P_xor2;
+P_xor1_d = (d, r_d) . P_xor2;
+P_xor1 = (xor1, r_xor1_c) . P_xor1_c + (xor1, r_xor1_d) . P_xor1_d;
+P_xor2 = (xor2, r_XOR) . (and2, r_AND) . P_and1_xor1;
+
+P <and1, and2> (P_and1_e <and1, and2> P_and1_xor1)
+    \end{lstlisting}

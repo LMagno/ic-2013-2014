@@ -147,13 +147,17 @@
     %\subsection{Descrição do Workflow, exemplo}
 \begin{frame}[fragile]{Descrição do Workflow}
     \framesubtitle{Exemplo}
-    \begin{lstlisting}
+    \begin{lstlisting}[basicstyle=\tiny]
 digraph {
-    a          -> xor1;
+    a          -> b;
+    b          -> and1;
+    and1 [and] -> e, xor1;
     xor1 [xor] -> [0.15] c, [0.85] d;
-    c [0.5]    -> xor2;
+    e    [0.5] -> and2;
+    c          -> xor2;
     d          -> xor2;
-    xor2       -> f;
+    xor2       -> and2;
+    and2       -> f;
 }
     \end{lstlisting}
 \end{frame}
@@ -198,16 +202,25 @@ digraph {
         \begin{column}[l]{5cm}
         \begin{lstlisting}[basicstyle=\tiny]
 digraph workflow1 {
-    a    [shape=box,label=a];
+    a    [shape=box, label=a];
     xor1 [shape=diamond,label=xor1,color=green];
     c    [shape=box,label=c];
-    xor2 [shape=diamond,label=xor2,color=green];
+    b    [shape=box,label=b];
+    e    [shape=box,label=e];
     d    [shape=box,label=d];
     f    [shape=box,label=f];
-    a    -> xor1;
+    xor2 [shape=diamond,label=xor2,color=green];
+    and1 [shape=diamond,label=and1,color=blue];
+    and2 [shape=diamond,label=and2,color=blue];
+    and1 -> e;
+    and2 -> f;
     c    -> xor2;
-    xor2 -> f;
+    e    -> and2;
+    xor2 -> and2;
     xor1 -> d [label="0.85"];
+    and1 -> xor1;
+    b    -> and1;
+    a    -> b;
     xor1 -> c [label="0.15"];
     d    -> xor2;
 }
@@ -216,15 +229,54 @@ digraph workflow1 {
 
         \begin{column}{5cm}
             \hfill
-            \includegraphics[width=3.5cm]{workflow2.pdf}
+            \includegraphics[width=2.9cm]{workflow1.pdf}
         \end{column}
     \end{columns}
 \end{frame}
 
     \subsection{Modelagem Analítica}
         \begin{frame}{Modelagem Analítica}
-
+            \begin{itemize}
+                \item<1-> Álgebra de processos estocástica
+                    \begin{itemize}
+                        \item<2-> Composicionalidade
+                        \item<2-> Formalismo
+                        \item<2-> Abstração
+                    \end{itemize}
+                \item<3-> \emph{PEPA - Performance Evaluation Process Algebra}
+                    \begin{itemize}
+                        \item<4-> Bem desenvolvida
+                        \item<4-> Ferramentas de apoio
+                    \end{itemize}
+            \end{itemize}
         \end{frame}
+
+\begin{frame}[fragile]{Modelagem Analítica}
+    \framesubtitle{Exemplo}
+    \begin{lstlisting}[basicstyle=\tiny]
+r_a = 1.0; r_b = 1.0; r_e = 0.5;
+r_c = 1.0; r_d = 1.0; r_f = 1.0;
+
+r_AND = 100.0; r_XOR = 100.0; r_OR  = 100.0;
+
+prob_xor1_c = 0.15;
+prob_xor1_d = 0.85;
+
+r_xor1_c = prob_xor1_c * r_XOR;
+r_xor1_d = prob_xor1_d * r_XOR;
+
+P = (a, r_a) . (b, r_b) . (and1, r_AND) . (and2, r_AND) . (f, r_f) . P;
+
+P_and1_e = (and1, r_AND) . (e, r_e) . (and2, r_AND) . P_and1_e;
+P_and1_xor1 = (and1, r_AND) . P_xor1;
+P_xor1_c = (c, r_c) . P_xor2;
+P_xor1_d = (d, r_d) . P_xor2;
+P_xor1 = (xor1, r_xor1_c) . P_xor1_c + (xor1, r_xor1_d) . P_xor1_d;
+P_xor2 = (xor2, r_XOR) . (and2, r_AND) . P_and1_xor1;
+
+P <and1, and2> (P_and1_e <and1, and2> P_and1_xor1)
+    \end{lstlisting}
+\end{frame}
 
     \subsection{Extração dos Índices de Desempenho}
         \begin{frame}{Extração dos Índices de Desempenho}
